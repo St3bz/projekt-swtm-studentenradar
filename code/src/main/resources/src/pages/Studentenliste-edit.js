@@ -13,9 +13,10 @@ const StudentenlisteEdit = () => {
   return (
     <div className="Studentenliste">
       <header className="Homepage-header">    
-        {/* <img src={Menu} className="Menu" alt="menu" />   */}
-        <img src={Info} className="Info" alt="info" />
-        <img src={Settings} className="Settings" alt="settings" />
+        <div className='headerData'>
+          <img src={Info} className="Info" alt="info" />
+          <img src={Settings} className="Settings" alt="settings" />
+        </div>
       </header>
       <div className="title">
         <b>Studenten</b>

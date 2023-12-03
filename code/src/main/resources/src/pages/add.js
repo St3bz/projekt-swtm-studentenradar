@@ -1,6 +1,8 @@
 import Settings from '../images/settings.png';
 import Info from '../images/Info1.png';
 import profileIcon from '../images/profile_icon.png';
+import timetable from '../images/timetable.png';
+import arrow from '../images/arrow.png';
 import '../style/App.css';
 
 
@@ -10,8 +12,10 @@ const addStudent = () => {
       <div className="addStudent">
       <header className="Homepage-header">    
         {/* <img src={Menu} className="Menu" alt="menu" />   */}
-        <img src={Info} className="Info" alt="info" />
-        <img src={Settings} className="Settings" alt="settings" />
+        <div className='headerData'>
+          <img src={Info} className="Info" alt="info" />
+          <img src={Settings} className="Settings" alt="settings" />
+        </div>
       </header>
 
       <div className="title">
@@ -57,9 +61,18 @@ const addStudent = () => {
             <div className="third-row-a">
               <p>Zeitraum</p>
               <div className="field-third-a">
+                <div className="date">
+                  <p>Von - </p>
+                  <img src={timetable} className='timetable' alt='profile'/>
+                </div>
 
               </div>
               <div className="field-third-b">
+                <div className="date">
+                  <p>Bis - </p>
+                  <img src={timetable} className='timetable' alt='profile'/>
+
+                </div>
 
               </div>
             </div>
@@ -75,6 +88,9 @@ const addStudent = () => {
             <div className="fourth-row-a">
               <p>Vertragsstatus</p>
               <div className="field-fourth-a">
+              <div className="arrow-field">
+              <img src={arrow} className='arrow' alt='profile'/>
+              </div>
 
               </div>
             </div>
@@ -91,13 +107,18 @@ const addStudent = () => {
               <p>Status</p>
             </div>
             <div className="field-fifth-a">
+            <div className="arrow-field">
+            <img src={arrow} className='arrow' alt='profile'/>
+            </div>
 
             </div>
           </div>
         </div>
       
         <div className="add-button">
-        <b>Hinzufügen</b>
+          <div className='adding'>
+            <b>Hinzufügen</b>
+          </div>
       </div>
     </div>
 

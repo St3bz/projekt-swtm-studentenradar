@@ -8,8 +8,10 @@ const profile = () => {
     return (
         <div className="Profile">
             <header className="Homepage-header">    
+            <div className='headerData'>
                 <img src={Info} className="Info" alt="info" />
                 <img src={Settings} className="Settings" alt="settings" />
+            </div>
             </header>
             <div className="title">
                 <b>Profil</b>

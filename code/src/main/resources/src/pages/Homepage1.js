@@ -11,8 +11,10 @@ function Homepage() {
     <div className="Homepage">
       <header className="Homepage-header">    
         {/* <img src={Menu} className="Menu" alt="menu" />   */}
-        <img src={Info} className="Info" alt="info" />
-        <img src={Settings} className="Settings" alt="settings" />
+        <div className='headerData'>
+          <img src={Info} className="Info" alt="info" />
+          <img src={Settings} className="Settings" alt="settings" />
+        </div>
       </header>
       <div className="greeting-text">
          <b>Willkommen Max Mustermann</b>
