@@ -1,0 +1,408 @@
+.Homepage {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.Homepage {
+  background-color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-header{
+  background-color: #CEDCEA;
+  height: 80px;
+  width: 100%;
+  object-position: top;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.greeting-text{
+  color: black;
+  font-size: 40px;
+  margin-top: 250px;
+
+}
+.search-bar{
+  background-color: #CEDCEA;
+  height: 80px;
+  width: 40%;
+  margin-top: 2%;
+  border-radius: 50px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.search-icon{
+  height: 30px;
+  width: 30px;
+  margin: 25px 15px 15px 15px;
+  flex-shrink: 0;
+}
+
+.Menu{
+  margin-top: 1%;
+}
+.Info{
+  height: 30px;
+  width: 30px;
+  margin-top: 1%;
+  margin-left: 91%;
+  
+}
+
+.Einstellung{
+  height: 30px;
+  width: 30px;
+  margin-left: 2%;
+}
+.box-field{
+  background-color: #0080ff;
+  height: 500px;
+  width: 100%;
+  margin-top: 3%;
+  border-radius: 5px;
+  display: flex;
+}
+
+
+.box1, .box2, .box3{
+  color: #ff002f;
+  height: 40px;
+  width: 30px;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.Studentenliste{
+  align-items: center;
+}
+
+.top{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+}
+.Headline{
+color: #043261;
+font-size: 36px;
+font-weight: 800;
+line-height: 44px;
+letter-spacing: 0em;
+margin-left: 10%;
+margin-top: 3%;
+margin-right: 14%;
+
+}
+.search-bar2{
+  background-color: #CEDCEA;
+  height: 80px;
+  width: 40%;
+  margin-top: 4%;
+  border-radius: 50px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.table-box{
+  background-color: #CEDCEA;
+  height: 800px;
+  width: 60%;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  margin-left: 20%;
+  margin-top: 2%;
+
+}
+/* CSS */
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; /* Set the table layout to fixed */
+}
+
+/* Optional styles for table cells, headers, etc. */
+.table th, .table td {
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 8px;
+  width: auto; /* Set width to auto for even column sizing */
+  text-align: center; /* Center align content */
+  font-size: 20px;
+}
+
+.table th {
+  background-color: #CEDCEA;
+}
+
+.auswahl{
+  margin-top: 2%;
+}
+
+.sort{
+  margin-left: 22%;
+}
+
+.selection{
+  margin-left: 53%;
+}
+
+.plus{
+  margin-left: 50%;
+}
+
+.deletion{
+  margin-left: 3%;
+}
+
+.addStudent{
+  margin: 0 auto;
+}
+.table-box-add{
+  background-color: #CEDCEA;
+  height: 800px;
+  width: 50%;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  margin-left: 25%;
+  margin-top: 3%;
+
+}
+
+.profile-icon{
+  margin-top: 5%;
+  margin-left: 45%;
+  margin-bottom: 5%;
+}
+  
+  .first-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* Align items vertically in the center */
+    font-size: 20px;
+    color: #043261;
+    font-weight: 700;
+  }
+  
+  .first-row-a,
+  .first-row-b {
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* Align items vertically in the center */
+    font-size: 20px;
+    color: #043261;
+    font-weight: 700;
+    margin-left: 10%;
+  }
+  
+  .first-row-b {
+    margin-left: 25%;
+  }
+  
+  .field-first-a {
+    height: 28px;
+    width: 180px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: inset 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    margin-left: 55px; /* Adjust the margin-left value as needed */
+  }
+  .field-first-b {
+    height: 28px;
+    width: 180px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: inset 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    margin-left: 25px; /* Adjust the margin-left value as needed */
+  }
+
+  .second-row{
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* Align items vertically in the center */
+    font-size: 20px;
+    color: #043261;
+    font-weight: 700;
+  }
+
+  .second-row-a, .second-row-b{
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* Align items vertically in the center */
+    font-size: 20px;
+    color: #043261;
+    font-weight: 700;
+    margin-left: 10%;
+
+  }
+
+  .second-row-b {
+    margin-left: 25%;
+  }
+
+  .field-second-a {
+    height: 28px;
+    width: 180px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: inset 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    margin-left: 25px; /* Adjust the margin-left value as needed */
+  }
+
+  .field-second-b {
+    height: 28px;
+    width: 180px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: inset 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    margin-left: 127px; /* Adjust the margin-left value as needed */
+  }
+
+
+  .third-row{
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* Align items vertically in the center */
+    font-size: 20px;
+    color: #043261;
+    font-weight: 700;
+  }
+
+  .third-row-a, .third-row-b{
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* Align items vertically in the center */
+    font-size: 20px;
+    color: #043261;
+    font-weight: 700;
+    margin-left: 10%;
+
+  }
+
+  .third-row-b {
+    margin-left: 17%;
+  }
+
+  .field-third-a {
+    height: 28px;
+    width: 100px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: inset 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    margin-left: 25px; /* Adjust the margin-left value as needed */
+  }
+
+  .field-third-b {
+    height: 28px;
+    width: 100px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: inset 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    margin-left: 80px; /* Adjust the margin-left value as needed */
+  }
+
+  .field-third-c {
+    height: 28px;
+    width: 180px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: inset 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    margin-left: 160px; /* Adjust the margin-left value as needed */
+  }
+
+  .fourth-row-a, .fourth-row-b{
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* Align items vertically in the center */
+    font-size: 20px;
+    color: #043261;
+    font-weight: 700;
+    margin-left: 10%;
+
+  }
+
+  .fourth-row-b{
+    margin-left: 21%;
+
+  }
+
+
+
+  .field-fourth-a {
+    height: 28px;
+    width: 180px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: inset 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    margin-left: 25px; /* Adjust the margin-left value as needed */
+  }
+
+ 
+  .field-fourth-c {
+    height: 28px;
+    width: 180px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: inset 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    margin-left: 33px; /* Adjust the margin-left value as needed */
+  }
+
+
+  .fifth-row-a {
+    margin-left: 10%;
+  }
+
+  .field-fifth-a {
+    height: 28px;
+    width: 180px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: inset 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    margin-left: 100px; /* Adjust the margin-left value as needed */
+  }
+
+
+
+  .add-button {
+    height: 28px;
+    width: 180px;
+    color: white;
+    background-color: #043261;
+    border-radius: 5px;
+    box-shadow: inset 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    margin-left: 78%; /* Adjust the margin-left value as needed */
+    margin-top: 10%;
+    
+  }
+
+
+table{
+  border: 2px solid white;
+}
+
+
+
+
+
+
+
