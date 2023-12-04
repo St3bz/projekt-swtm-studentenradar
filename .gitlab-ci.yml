@@ -18,3 +18,6 @@ sast:
   stage: test
   script:
     - /analyzer run
+include:
+- template: Security/SAST.gitlab-ci.yml
+
