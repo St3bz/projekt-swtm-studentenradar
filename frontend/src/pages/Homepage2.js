@@ -6,7 +6,7 @@ import team from '../images/shortcut-teams.png';
 import ITLogo from '../images/IT-Designer.png';
 import '../style/App.css';
 
-function HomepageAdmin() {
+function HomepageIt() {
   return (
     <div className="Homepage">
       <header className="Homepage-header">    
@@ -17,7 +17,7 @@ function HomepageAdmin() {
         </div>
       </header>
       <div className="greeting-text">
-         <b>Willkommen Verwaltung</b>
+         <b>Willkommen It</b>
       </div>
       <div className="search-bar">
         <img src={search} className="search-icon" alt="search" />
@@ -37,4 +37,4 @@ function HomepageAdmin() {
   );
 }
 
-export default HomepageAdmin;
+export default HomepageIt;
