@@ -5,8 +5,6 @@ import timetable from '../images/timetable.png';
 import arrow from '../images/arrow.png';
 import '../style/App.css';
 
-
-
 const addStudent = () => {
     return (
       <div className="addStudent">

@@ -1,7 +1,4 @@
-import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
-import Keycloak from "keycloak-js";
-import { useEffect } from "react";
-
+import { Routes, Route} from "react-router-dom";
 import Studentenliste from "./pages/Studentenliste"; // Import der neuen Seite
 import HomepageAdmin from "./pages/Homepage1.js";
 import HomepageIt from "./pages/Homepage2.js";
@@ -17,55 +14,8 @@ import Team6 from "./pages/team6.js";
 import Sidebar from "./pages/Sidebar.js";
 import Profile from "./pages/profile.js";
 
-const keycloak = new Keycloak({
-  url: "http://localhost:8080",
-  realm: "Studentenradar",
-  clientId: "Studentenradar-Client",
-});
-
-const authenticated = await keycloak.init({
-  onLoad: "login-required",
-  checkLoginIframe: true
-});
-
 function App() {
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  useEffect(() => {
-    console.log("Hass")
-    if (!authenticated) {
-      keycloak.login();
-    } else {
-        let roles = "";
-        if (
-          keycloak.tokenParsed.resource_access["Studentenradar-Client"] != null
-        ) {
-          roles =
-            keycloak.tokenParsed.resource_access["Studentenradar-Client"].roles;
-        }
-        const url = `http://localhost:8081/test/${roles}`;
-        fetch(url, {    // authorisierung vom backend
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${keycloak.token}`,
-          },
-        })
-          .then((response) => response.status)
-          .then((data) => {
-            if (data === 200 && location.pathname === "/") {
-              navigate(`/${roles}`);
-            }
-          }); 
-      } 
-    }, [navigate, location]);
-
-  const handleLogout = () => {
-    keycloak.logout({ redirectUri: "http://localhost:3000/" });
-  };
-
-  return (
+    return (
     <div className="App">
       <Sidebar pageWrapId={"page-wrap"} outerContainerId={"outer-container"} />
 
@@ -86,9 +36,6 @@ function App() {
         <Route path="/profile" element={<Profile />} />
       </Routes>
 
-      <div>
-        <button onClick={handleLogout}>Logout</button>
-      </div>
     </div>
   );
 }
