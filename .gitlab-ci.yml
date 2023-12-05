@@ -20,4 +20,3 @@ sast:
     - /analyzer run
 include:
 - template: Security/SAST.gitlab-ci.yml
-
