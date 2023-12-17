@@ -14,8 +14,58 @@ import Team6 from "./pages/team6.js";
 import Sidebar from "./pages/Sidebar.js";
 import Profile from "./pages/profile.js";
 
+const keycloak = new Keycloak({
+  url: "http://localhost:8080",
+  realm: "Studentenradar",
+  clientId: "Studentenradar-Client",
+  redirectUri: "http://localhost:3000"
+});
+
+const authenticated = await keycloak.init({
+  onLoad: "login-required",
+  checkLoginIframe: true
+});
+
 function App() {
-    return (
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!authenticated) {
+      keycloak.login();
+    } else {
+        let roles = "";
+        if (
+          keycloak.tokenParsed.resource_access["Studentenradar-Client"] != null
+        ) {
+          roles =
+            keycloak.tokenParsed.resource_access["Studentenradar-Client"].roles;
+        }
+        const url = `http://localhost:8081/test/${roles}`;
+        fetch(url, {    // authorisierung vom backend
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${keycloak.token}`,
+          },
+        })
+          .then((response) => response.status)
+          .then((data) => {
+            if (data === 200 && location.pathname === "/") {
+              navigate(`/${roles}`);
+            }
+            else {
+              console.log(data);
+            }
+          }); 
+      } 
+    }, [navigate, location]);
+
+  const handleLogout = () => {
+    keycloak.logout({ redirectUri: "http://localhost:3000/" });
+  };
+
+  return (
     <div className="App">
       <Sidebar pageWrapId={"page-wrap"} outerContainerId={"outer-container"} />
 

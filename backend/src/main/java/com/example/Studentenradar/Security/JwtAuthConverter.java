@@ -1,4 +1,4 @@
-package com.example.Studentenradar;
+package com.example.Studentenradar.Security;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.convert.converter.Converter;

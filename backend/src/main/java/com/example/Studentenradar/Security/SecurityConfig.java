@@ -1,4 +1,4 @@
-package com.example.Studentenradar;
+package com.example.Studentenradar.Security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,10 +21,10 @@ public class SecurityConfig {
         jwtAuthConverter = new JwtAuthConverter();
     }
 
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity HTTP) 
         throws Exception{
+    
         HTTP.csrf(csrf -> csrf.disable());
         HTTP.authorizeHttpRequests(authorize -> authorize.anyRequest().authenticated());
         HTTP.oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthConverter)));
@@ -34,3 +34,4 @@ public class SecurityConfig {
         }
 
 }
+
