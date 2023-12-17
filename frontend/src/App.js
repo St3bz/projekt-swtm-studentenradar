@@ -21,6 +21,7 @@ const keycloak = new Keycloak({
   url: "http://localhost:8080",
   realm: "Studentenradar",
   clientId: "Studentenradar-Client",
+  redirectUri: "http://localhost:3000"
 });
 
 const authenticated = await keycloak.init({
@@ -33,7 +34,6 @@ function App() {
   const location = useLocation();
 
   useEffect(() => {
-    console.log("Hass")
     if (!authenticated) {
       keycloak.login();
     } else {
@@ -56,6 +56,9 @@ function App() {
           .then((data) => {
             if (data === 200 && location.pathname === "/") {
               navigate(`/${roles}`);
+            }
+            else {
+              console.log(data);
             }
           }); 
       } 

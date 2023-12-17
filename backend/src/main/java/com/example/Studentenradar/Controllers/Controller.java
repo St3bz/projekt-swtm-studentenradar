@@ -1,4 +1,4 @@
-package com.example.Studentenradar;
+package com.example.Studentenradar.Controllers;
 
 import java.nio.file.AccessDeniedException;
 
@@ -26,20 +26,29 @@ public class Controller {
 
     @GetMapping("/Administration")
     @PreAuthorize("hasRole('Administration')")
+  //  @ResponseStatus(HttpStatus.OK)
     public String adminiEndpoint() {
         return "Dieser Endpunkt ist nur für die ADMINISTRATION zugänglich.";
     }
 
     @GetMapping("/It")
     @PreAuthorize("hasRole('It')")
-    @ResponseStatus(HttpStatus.OK)
+  //  @ResponseStatus(HttpStatus.OK)
     public String itEndpoint() {
         return "Dieser Endpunkt ist nur für die IT zugänglich.";
     }
 
-    @ExceptionHandler(AccessDeniedException.class)
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    public String handleAccessDeniedException(AccessDeniedException ex) {
-        return "Zugriff verweigert: Sie haben nicht die erforderliche Rolle für diesen Endpunkt.";
+    @GetMapping("/Supervisor")
+    @PreAuthorize("hasRole('Supervisor')")
+  //  @ResponseStatus(HttpStatus.OK)
+    public String supervisorEndpoint() {
+        return "Dieser Endpunkt ist nur für die Betreuung zugänglich.";
+    }
+
+    @GetMapping("/Ceo")
+    @PreAuthorize("hasRole('Ceo')")
+  //  @ResponseStatus(HttpStatus.OK)
+    public String ceoEndpoint() {
+        return "Dieser Endpunkt ist nur für die Geschäftsführung zugänglich.";
     }
 }
