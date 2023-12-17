@@ -94,3 +94,16 @@
   .bm-overlay {
     background: rgba(0, 0, 0, 0.3);
   }
+  .logoutIcon{
+    width: 70px;
+    height: 70px;
+    flex-shrink: 0;
+    mix-blend-mode: darken;
+  }
+  .LogOut button{
+    mix-blend-mode: darken;
+    border: none;
+  }
+  .LogOut{
+    margin: auto auto 8px 8px;
+  }

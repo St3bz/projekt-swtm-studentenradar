@@ -1,7 +1,4 @@
-import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
-import Keycloak from "keycloak-js";
-import { useEffect } from "react";
-
+import { Routes, Route} from "react-router-dom";
 import Studentenliste from "./pages/Studentenliste"; // Import der neuen Seite
 import HomepageAdmin from "./pages/Homepage1.js";
 import HomepageIt from "./pages/Homepage2.js";
@@ -89,9 +86,6 @@ function App() {
         <Route path="/profile" element={<Profile />} />
       </Routes>
 
-      <div>
-        <button onClick={handleLogout}>Logout</button>
-      </div>
     </div>
   );
 }
