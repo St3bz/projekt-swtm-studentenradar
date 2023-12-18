@@ -1,21 +1,11 @@
 import search from '../images/search_icon.png';
-import Settings from '../images/settings.png';
-import Info from '../images/Info1.png';
 import stud from '../images/shortcut-stud.png';
 import team from '../images/shortcut-teams.png';
 import ITLogo from '../images/IT-Designer.png';
-import '../style/App.css';
 
 function HomepageIt() {
   return (
     <div className="Homepage">
-      <header className="Homepage-header">    
-        {/* <img src={Menu} className="Menu" alt="menu" />   */}
-        <div className='headerData'>
-          <img src={Info} className="Info" alt="info" />
-          <img src={Settings} className="Settings" alt="settings" />
-        </div>
-      </header>
       <div className="greeting-text">
          <b>Willkommen It</b>
       </div>

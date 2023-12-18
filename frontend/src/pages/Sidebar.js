@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
-import { useNavigate, useLocation } from "react-router-dom";
+/* import React, { useEffect } from 'react';
+import { useNavigate, useLocation } from "react-router-dom"; */
 import { slide as Menu } from 'react-burger-menu';
+import {Link} from 'react-router-dom';
 import '../style/Sidebar.css';
-import Log from '../images/logout.png';
-import Keycloak from "keycloak-js";
+/* import Log from '../images/logout.png'; */
+/* import Keycloak from "keycloak-js"; */
 
-const keycloak = new Keycloak({
+/* const keycloak = new Keycloak({
   url: "http://localhost:8080",
   realm: "Studentenradar",
   clientId: "Studentenradar-Client",
@@ -18,9 +19,9 @@ const authenticated = await keycloak.init({
   onLoad: "login-required",
   checkLoginIframe: true
 });
-
+ */
 export default props => {
-  const navigate = useNavigate();
+  /* const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
@@ -50,24 +51,24 @@ export default props => {
             }
           }); 
       } 
-    }, [navigate, location]);
+    }, [navigate, location]); */
 
   return (
     <Menu>
-      <a className="menu-item" href="/">
+      <Link className="menu-item" to="/">
         Home
-      </a>
-      <a className="menu-item" href="/studentenliste">
+      </Link>
+      <Link className="menu-item" to="/students">
         Studenten
-      </a>
-      <a className="menu-item" href="/teams">
+      </Link>
+      <Link className="menu-item" to="/teams">
         Teams
-      </a>
-      <div className='LogOut'>
+      </Link>
+      {/* <div className='LogOut'>
         <button onClick={handleLogout}>
           <img src={Log} className='logoutIcon' alt='logout'/>
         </button>
-      </div>
+      </div> */}
     </Menu>
   );
 };

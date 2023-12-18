@@ -1,18 +1,28 @@
-import { Routes, Route} from "react-router-dom";
-import Studentenliste from "./pages/Studentenliste"; // Import der neuen Seite
+import { useNavigate, useLocation, BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import Keycloak from "keycloak-js";
+import React, { useEffect } from 'react';
+/* import Studentenliste from "./pages/Studentenliste"; // Import der neuen Seite
 import HomepageAdmin from "./pages/Homepage1.js";
 import HomepageIt from "./pages/Homepage2.js";
-import StudentenlisteEdit from "./pages/Studentenliste-edit";
-import Add from "./pages/add";
-import Teams from "./pages/teams.js"; // Import der neuen Seite
-import Team1 from "./pages/team1.js";
+import StudentenlisteEdit from "./pages/Studentenliste-edit"; */
+/* import Team1 from "./pages/team1.js";
 import Team2 from "./pages/team2.js";
 import Team3 from "./pages/team3.js";
 import Team4 from "./pages/team4.js";
 import Team5 from "./pages/team5.js";
-import Team6 from "./pages/team6.js";
+import Team6 from "./pages/team6.js"; */
 import Sidebar from "./pages/Sidebar.js";
+import Navbar from './pages/Navbar';
 import Profile from "./pages/profile.js";
+import AddStudent from './pages/AddStudent'
+import Hardware from './pages/Hardware'
+import HardwareEdit from './pages/HardwareEdit'
+import StudentsEdit from './pages/StudentsEdit';
+import Students from './pages/Students.js';
+import Home from './pages/Home';
+import Log from './images/logout.png';
+import Team from './pages/Team.js';
+import ShowTeam from './pages/ShowTeam.js';
 
 const keycloak = new Keycloak({
   url: "http://localhost:8080",
@@ -26,6 +36,9 @@ const authenticated = await keycloak.init({
   checkLoginIframe: true
 });
 
+const handleLogout = () => {
+  keycloak.logout({ redirectUri: "http://localhost:3000/" });
+};
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -61,31 +74,26 @@ function App() {
       } 
     }, [navigate, location]);
 
-  const handleLogout = () => {
-    keycloak.logout({ redirectUri: "http://localhost:3000/" });
-  };
 
   return (
     <div className="App">
-      <Sidebar pageWrapId={"page-wrap"} outerContainerId={"outer-container"} />
-
-      <Routes>
-        <Route index element={<HomepageAdmin />} />
-        <Route path="/Administration" element={<HomepageAdmin />} />
-        <Route path="/It" element={<HomepageIt />} />
-        <Route path="/Studentenliste" element={<Studentenliste />} />
-        <Route path="/Studentenliste-edit" element={<StudentenlisteEdit />} />
-        <Route path="/add" element={<Add />} />
-        <Route path="/teams" element={<Teams />} />
-        <Route path="/team1" element={<Team1 />} />
-        <Route path="/team2" element={<Team2 />} />
-        <Route path="/team3" element={<Team3 />} />
-        <Route path="/team4" element={<Team4 />} />
-        <Route path="/team5" element={<Team5 />} />
-        <Route path="/team6" element={<Team6 />} />
-        <Route path="/profile" element={<Profile />} />
-      </Routes>
-
+      <Sidebar pageWrapId={"page-wrap"} outerContainerId={"outer-container"}/>
+      <Navbar />
+      <div className="content">
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="/Administration" element={<Home />} />
+          {/* <Route path="/It" element={<HomepageIt />} /> */}
+          <Route path="/Students" element={<Students />} />
+          <Route path="/StudentsEdit" element={<StudentsEdit />} />
+          <Route path="/HardwareEdit" element={<HardwareEdit />} />
+          <Route path="/Hardware" element={<Hardware />} />
+          <Route path="/add" element={<AddStudent />} />
+          <Route path="/teams" element={<Team />} />
+          <Route path="/teams/:id" element={<ShowTeam />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+      </div>
     </div>
   );
 }

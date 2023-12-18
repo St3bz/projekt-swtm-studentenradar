@@ -1,18 +1,9 @@
 import React from 'react';
-import Settings from '../images/settings.png';
-import Info from '../images/Info1.png';
 import profileIcon from '../images/profile_icon.png';
 import time from '../images/time.png';
-import '../style/App.css';
 const profile = () => {
     return (
         <div className="Profile">
-            <header className="Homepage-header">    
-            <div className='headerData'>
-                <img src={Info} className="Info" alt="info" />
-                <img src={Settings} className="Settings" alt="settings" />
-            </div>
-            </header>
             <div className="title">
                 <b>Profil</b>
             </div>
