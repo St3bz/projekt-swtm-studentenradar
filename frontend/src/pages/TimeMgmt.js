@@ -1,16 +1,31 @@
 import { useState } from "react";
+import profileIcon from '../images/profile_icon.png';
+import goBackBtn from '../images/backButton.png';
+import { useNavigate } from 'react-router-dom';
 const TimeMgmt = () => {
+    const navigate = useNavigate();
     const goBack = () => {
-		navigate('/profile', {replace: true});
+		navigate('/time', {replace: true});
 	}
 
-    const [text, setText] = useState('');
+    const [text, setText] = useState(null);
+    const [isPending, setIsPending] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const time = {text};
 
-        console.log(time);
+        setIsPending(true);
+
+        fetch('http://localhost:8000/time', {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify(time)
+        }).then(() => {
+            /* console.log('time added');
+            setIsPending(false); */
+            navigate('/time');
+        })
     }
     return (  
         <div className="timeMgmt">
@@ -34,9 +49,10 @@ const TimeMgmt = () => {
                 <textarea
                     required
                     value={text}
-                    onChange={(e) => setText(e.target.value)}>
-                </textarea>
-                <button>Speichern</button>
+                    onChange={(e) => setText(e.target.value)}
+                />
+                {!isPending && <button>Speichern</button>}
+                {isPending && <button disabled>wird gespeichert...</button>}
             </form>
         </div>
     );

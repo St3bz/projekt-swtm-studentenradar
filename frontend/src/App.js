@@ -1,19 +1,9 @@
 import { useNavigate, useLocation, BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Keycloak from "keycloak-js";
 import React, { useEffect } from 'react';
-/* import Studentenliste from "./pages/Studentenliste"; // Import der neuen Seite
-import HomepageAdmin from "./pages/Homepage1.js";
-import HomepageIt from "./pages/Homepage2.js";
-import StudentenlisteEdit from "./pages/Studentenliste-edit"; */
-/* import Team1 from "./pages/team1.js";
-import Team2 from "./pages/team2.js";
-import Team3 from "./pages/team3.js";
-import Team4 from "./pages/team4.js";
-import Team5 from "./pages/team5.js";
-import Team6 from "./pages/team6.js"; */
 import Sidebar from "./pages/Sidebar.js";
 import Navbar from './pages/Navbar';
-import Profile from "./pages/profile.js";
+import Profile from "./pages/Profile.js";
 import AddStudent from './pages/AddStudent'
 import Hardware from './pages/Hardware'
 import HardwareEdit from './pages/HardwareEdit'
@@ -23,6 +13,8 @@ import Home from './pages/Home';
 import Log from './images/logout.png';
 import Team from './pages/Team.js';
 import ShowTeam from './pages/ShowTeam.js';
+import AddTime from './pages/TimeMgmt.js';
+import Time from './pages/ShowTimeMgmt.js';
 
 const keycloak = new Keycloak({
   url: "http://localhost:8080",
@@ -46,33 +38,34 @@ function App() {
   useEffect(() => {
     if (!authenticated) {
       keycloak.login();
-    } else {
-        let roles = "";
-        if (
-          keycloak.tokenParsed.resource_access["Studentenradar-Client"] != null
-        ) {
-          roles =
-            keycloak.tokenParsed.resource_access["Studentenradar-Client"].roles;
-        }
-        const url = `http://localhost:8081/test/${roles}`;
-        fetch(url, {    // authorisierung vom backend
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${keycloak.token}`,
-          },
-        })
-          .then((response) => response.status)
-          .then((data) => {
-            if (data === 200 && location.pathname === "/") {
-              navigate(`/${roles}`);
-            }
-            else {
-              console.log(data);
-            }
-          }); 
-      } 
-    }, [navigate, location]);
+    } 
+    else {
+      let roles = "";
+      if (
+        keycloak.tokenParsed.resource_access["Studentenradar-Client"] != null
+      ) {
+        roles =
+          keycloak.tokenParsed.resource_access["Studentenradar-Client"].roles;
+      }
+      const url = `http://localhost:8081/test/${roles}`;
+      fetch(url, {    // authorisierung vom backend
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${keycloak.token}`,
+        },
+      })
+        .then((response) => response.status)
+        .then((data) => {
+          if (data === 200 && location.pathname === "/") {
+            navigate(`/${roles}`);
+          }
+          else {
+            console.log(data);
+          }
+        }); 
+    } 
+  }, [navigate, location]);
 
 
   return (
@@ -92,6 +85,8 @@ function App() {
           <Route path="/teams" element={<Team />} />
           <Route path="/teams/:id" element={<ShowTeam />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/time/addtime" element={<AddTime />} />
+          <Route path="/time" element={<Time />} />
         </Routes>
       </div>
     </div>

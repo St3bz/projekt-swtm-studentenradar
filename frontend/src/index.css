@@ -431,7 +431,7 @@ form{
   gap: 3.0746vmin; /* 40px */
   flex-wrap: wrap;
 }
-.team{
+.teamViewPrev{
   background-color: #CEDCEA;
   width: 16.68vmin; /* 217px */
   height: 24.597vmin;/* 320px; */
@@ -563,4 +563,150 @@ form{
 }
 .goBack{
   width: 1.229824vmin; /* 16px */
+}
+/* profile.css */
+.profileInfo{
+  display: flex;
+  height: auto;
+  width: 56.188vmin; /* 731px */
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  gap: 3.0746vmin; /* 40px */
+  flex-wrap: nowrap;
+}
+.profileIcon{
+  height: 11.5296vmin;
+  width: auto;
+}
+.time{
+  width: auto;
+  height: 5.5342vmin; /* 72px */
+}
+.profileName b{
+  color:#043261;
+  font-size: 2.459648vmin; /* 32px */
+}
+.profileName p{
+  color:rgba(4, 50, 97, 0.61);
+  font-size: 1.844731vmin; /* 24px */
+  font-weight: bold;
+}
+.profileName{
+  margin: auto 56.188vmin auto 2.459648vmin; /* 731px */
+}
+.profileData{
+  margin: 6.14912vmin auto auto auto; /* 80px */
+  display: flex;
+  height: auto;
+  width: 94.54328vmin; /* 1250px */
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+}
+.contractData{
+  background-color: #CEDCEA;
+  width: 46.503vmin; /* 605px */
+  height: 39.432vmin; /* 513px */
+  border-radius: 1.53728vmin; /* 20px */
+  flex-shrink: 0;
+}
+.education{
+  background-color: #CEDCEA;
+  width: 46.503vmin; /* 605px */
+  height: 39.432vmin; /* 513px */
+  border-radius: 1.53728vmin; /* 20px */
+  flex-shrink: 0;
+}
+.dataTitle{
+  color:#043261;
+  font-size: 1.844731vmin; /* 24px */
+  margin: 1.229824vmin auto auto 2.459648vmin;
+}
+.dataTable{
+  margin: 1.229824vmin auto auto 2.459648vmin;
+}
+.dataTable tr{
+  font-size: 1.844731vmin; /* 24px */
+  color:#043261;
+  display: flex;
+  width: 21.602vmin; /* 333px */
+  justify-content: space-between;
+  align-items: center;
+  margin: 1.229824vmin 1.844731vmin 1.229824vmin 1.844731vmin; /* 16px 24px 16px 24px */
+}
+
+.date{
+  margin: 5% auto auto auto;
+  display:flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  font-size: 1.153vmin; /* 15px */
+  justify-content: space-around;
+  
+}
+.timetable{
+  height: 1.768vmin; /* 24px */
+  width: auto;
+}
+.arrow-field{
+  margin: 7% 5% auto auto;
+  display:flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.arrow{
+  height: auto;
+  width: 1.229824vmin;
+}
+.goBackBtn{
+  align-self: start;
+  margin: 2.459648vmin 2.459648vmin; /* 32px 32px */
+}
+/* Time.css */
+.timeEditBox{
+  background-color: #CEDCEA;
+  height: 61.492vmin;
+  width: 100vmin;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 0.76864vmin;
+  margin: auto;
+  margin-top: 2%;
+}
+.contentBox{
+  padding: 2.459648vmin; /* 32px */
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.editBox{
+  padding: 2.459648vmin; /* 32px */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.edit{
+  height: 2.307vmin;
+  width: 2.307vmin;
+}
+
+textarea{
+  height: 56.5vmin;
+  width: 75vmin;
+  border-radius: 0.76864vmin;
+  box-sizing: border-box;
+  border: none;
+  font-size: 1.229824vmin; /* 16px */
+  padding: 0.922368vmin;
+  resize: none;
+}
+.addButton{
+  height:  2.459648vmin; /* 32px */
+  width: 13.835528vmin; /* 180px */
+  text-align: center;
+  background-color: #043261;
+  border-radius: 5px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }

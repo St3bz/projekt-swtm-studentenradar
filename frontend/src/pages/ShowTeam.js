@@ -3,7 +3,7 @@ import User from '../images/icon_user.png';
 import Calendar from '../images/calendar.png';
 import goBackBtn from '../images/backButton.png';
 import Add from '../images/add.png';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import useFetch from './useFetch';
 const ShowTeam = () => {
     const {id} = useParams();

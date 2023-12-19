@@ -1,7 +1,8 @@
 import React from 'react';
 import profileIcon from '../images/profile_icon.png';
 import time from '../images/time.png';
-const profile = () => {
+import { Link } from 'react-router-dom';
+const Profile = () => {
     return (
         <div className="Profile">
             <div className="title">
@@ -13,7 +14,7 @@ const profile = () => {
                     <b>Rainer Zufall</b>
                     <p>Werkstudent</p>
                 </div>
-                <img src={time} className='time' alt='time'/>
+                <Link to='/time'><img src={time} className='time' alt='time'/></Link>
             </div>
             <div className='profileData'>
                 <div className='contractData'>
@@ -79,4 +80,4 @@ const profile = () => {
     );
 };
 
-export default profile;
+export default Profile;

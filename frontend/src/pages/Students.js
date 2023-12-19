@@ -1,6 +1,7 @@
 import sort from '../images/sort.png';
 import selection from '../images/selection.png';
 import Searchbar from './Searchbar';
+import {Link } from 'react-router-dom';
 
 const Students = () => {
     return ( 
