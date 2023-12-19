@@ -1,0 +1,39 @@
+{
+  "team": [
+    {
+      "title": "Minispiel-Portal",
+      "author": "Sandra Wickner",
+      "id": 1
+    },
+    {
+      "title": "Medizinisches Forschungsprojekt",
+      "author": "Sandra Wickner",
+      "id": 2
+    },
+    {
+      "title": "Minispiel-Portal",
+      "author": "Michael Watzko",
+      "id": 3
+    },
+    {
+      "title": "Forschungsprojekt Verkehrmessung",
+      "author": "Michael Watzko",
+      "id": 4
+    },
+    {
+      "title": "Kubernetes i.d. Infrastrukturentw.",
+      "author": "Sandra Wickner",
+      "id": 5
+    },
+    {
+      "title": "Web-Entwicklung Blockchain",
+      "author": "Ömer Haybat",
+      "id": 6
+    }
+  ],
+  "time": [
+    {
+      "text": "am 3.9.23 3h"
+    }
+  ]
+}

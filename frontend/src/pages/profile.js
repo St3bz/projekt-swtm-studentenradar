@@ -1,18 +1,10 @@
 import React from 'react';
-import Settings from '../images/settings.png';
-import Info from '../images/Info1.png';
 import profileIcon from '../images/profile_icon.png';
 import time from '../images/time.png';
-import '../style/App.css';
-const profile = () => {
+import { Link } from 'react-router-dom';
+const Profile = () => {
     return (
         <div className="Profile">
-            <header className="Homepage-header">    
-            <div className='headerData'>
-                <img src={Info} className="Info" alt="info" />
-                <img src={Settings} className="Settings" alt="settings" />
-            </div>
-            </header>
             <div className="title">
                 <b>Profil</b>
             </div>
@@ -22,7 +14,7 @@ const profile = () => {
                     <b>Rainer Zufall</b>
                     <p>Werkstudent</p>
                 </div>
-                <img src={time} className='time' alt='time'/>
+                <Link to='/time'><img src={time} className='time' alt='time'/></Link>
             </div>
             <div className='profileData'>
                 <div className='contractData'>
@@ -88,4 +80,4 @@ const profile = () => {
     );
 };
 
-export default profile;
+export default Profile;
