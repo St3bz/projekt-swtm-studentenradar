@@ -1,0 +1,67 @@
+package com.example.studentenradar.supervisor.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.studentenradar.student.model.Student;
+import com.example.studentenradar.supervisor.model.Supervisor;
+import com.example.studentenradar.supervisor.repository.SupervisorRepository;
+
+import java.util.Collections;
+
+@Service
+public class SupervisorBusinessService {
+    private SupervisorRepository supervisorRepository;
+
+    @Autowired
+    SupervisorBusinessService(SupervisorRepository supervisorRepository) {
+        super();
+        this.supervisorRepository = supervisorRepository;
+    }
+
+    public Optional<Supervisor> getById(int id) {
+        return supervisorRepository.findById(id);
+    }
+
+    public List<Supervisor> getSupervisors() {
+        return supervisorRepository.findAll();
+    }
+
+    public Supervisor addSupervisor(Supervisor supervisor) {
+        return supervisorRepository.save(supervisor);
+    }
+
+    public boolean deleteSupervisor(int id) {
+        Optional<Supervisor> supervisor = supervisorRepository.findById(id);
+
+        if (supervisor.isPresent()) {
+            supervisorRepository.delete(supervisor.get());
+            return true;
+        }
+        return false;
+    }
+
+    public Supervisor updateSupervisor(int id, Supervisor updatedSupervisor) {
+        Optional<Supervisor> supervisor = supervisorRepository.findById(id);
+
+        if (supervisor.isPresent()) {
+            Supervisor foundSupervisor = supervisor.get();
+            foundSupervisor.setFirstName(updatedSupervisor.getFirstName());
+            foundSupervisor.setLastName(updatedSupervisor.getLastName());
+            return supervisorRepository.save(foundSupervisor);
+        }
+        return null;
+    }
+
+    public List<Student> getSupervisorMembersById(int id) {
+        Optional<Supervisor> supervisor = getById(id);
+
+        if (supervisor.isPresent()) {
+            return supervisor.get().getStudents();
+        }
+        return Collections.emptyList();
+    }
+}
