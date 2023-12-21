@@ -20,6 +20,8 @@
   width: 100%;
   object-position: top;
   margin: 0; 
+  position: sticky;
+  overflow: hidden;
 }
 .headerData{
   display: flex;
@@ -709,4 +711,30 @@ textarea{
   background-color: #043261;
   border-radius: 5px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  margin-left: 280%;
+}
+
+.Icons{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.backButton{
+  height: 25px;
+  max-width: 50%;
+  margin-right: 280%;
+  margin-left: 2%;
+}
+
+
+.table-box-add-hardware{
+  background-color: #CEDCEA;
+  height: 45vmin; /* 800px */
+  width: 80vmin;/* 1344px */
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 0.76864vmin; /* 10px */
+  margin: 3% auto auto auto;
+
 }

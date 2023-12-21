@@ -7,10 +7,13 @@ import useFetch from './useFetch';
 
 const Students = () => {
     const {id} = useParams();
-    const {data:students, error, isPending} = useFetch('http://localhost:8000/students/' + id);
+    const {data:students, error, isPending} = useFetch('http://localhost:8000/team/' + id);
     return ( 
         <div>
-            
+            {error && <div>{error}</div>}
+            {isPending && <div>Loading...</div>}
+            {students && (
+            <div>
             <div className="title">
                 <b>Studenten</b>
             </div>
@@ -19,10 +22,6 @@ const Students = () => {
                 <img src={sort} className="sort" alt="logo" />  
                 <Link to="/StudentsEdit"><img src={selection} className="selection" alt="logo" /></Link>
             </div>
-            {error && <div>{error}</div>}
-            {isPending && <div>Loading...</div>}
-            {students && (
-            <div>
             <div className="table-box">
                 <table className="table">
                     <tr>

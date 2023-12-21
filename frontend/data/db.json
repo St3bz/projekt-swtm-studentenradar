@@ -35,5 +35,38 @@
     {
       "text": "am 3.9.23 3h"
     }
+  ],
+
+
+  "students":[
+    {
+      "name": "Michl",
+      "vorname": "Nico",
+      "projekt": "Projekt A",
+      "id": 1
+    },
+    {
+      "name": "Zufall",
+      "vorname": "Rainer",
+      "projekt": "Projekt C",
+      "id": 2
+    },
+    {
+      "name": "Weißglut",
+      "vorname": "Wilma",
+      "projekt": "Projekt A",
+      "id": 3
+    },
+    {
+      "name": "Contreras",
+      "vorname": "Isabel",
+      "projekt": "Projekt B",
+      "id": 4
+    }
+    
+
   ]
 }
+
+
+
