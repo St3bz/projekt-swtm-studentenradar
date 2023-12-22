@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table class="table table-striped">
+        <caption>
+          Just for testing purposes
+        </caption>
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Name</th>
+              <th scope="col">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="project : ${projects}">
+              <td th:text="${project.id}"></td>
+              <td th:text="${project.name}"></td>
+              <td th:text="${project.description}"></td>
+            </tr>
+          </tbody>
+        </table>
+</body>
+</html>
