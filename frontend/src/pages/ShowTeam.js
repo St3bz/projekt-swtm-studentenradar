@@ -7,7 +7,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import useFetch from './useFetch';
 const ShowTeam = () => {
     const {id} = useParams();
-    const {data:team, error, isPending} = useFetch('http://localhost:8000/team/' + id);
+    const {data:team, error, isPending} = useFetch('/api/v1/project/' + id);
     const navigate = useNavigate();
 	const goBack = () => {
 		navigate('/teams', {replace: true});
@@ -37,22 +37,20 @@ const ShowTeam = () => {
                         <div className='boxes'>
                             <div className='projMember'>
                                 <table>
-                                    <tr>
-                                        <th>Vorname</th>
-                                        <th>Nachname</th>
-                                    </tr>
-                                    <tr>
-                                        <th>...</th>
-                                        <th>...</th>
-                                    </tr>
-                                    <tr>
-                                        <th>...</th>
-                                        <th>...</th>
-                                    </tr>
-                                    <tr>
-                                        <th>...</th>
-                                        <th>...</th>
-                                    </tr>
+                                    <thead>
+                                       <tr>
+                                            <th>Vorname</th>
+                                            <th>Nachname</th>
+                                        </tr> 
+                                    </thead>
+                                    <tbody>
+                                        {team.student.map(student => (
+                                            <tr key={student.id}>
+                                                <td>{student.firstName}</td>
+                                                <td>{student.lastName}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
                                 </table>
                             </div>
                             <div className='projDetails'>
