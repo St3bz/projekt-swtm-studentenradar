@@ -1,4 +1,4 @@
-package com.example.studentenradar.supervisor.service;
+package com.example.Studentenradar.supervisor.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,10 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.studentenradar.student.model.Student;
-import com.example.studentenradar.student.repository.StudentRepository;
-import com.example.studentenradar.supervisor.model.Supervisor;
-import com.example.studentenradar.supervisor.repository.SupervisorRepository;
+import com.example.Studentenradar.student.model.Student;
+import com.example.Studentenradar.student.repository.StudentRepository;
+import com.example.Studentenradar.supervisor.model.Supervisor;
+import com.example.Studentenradar.supervisor.repository.SupervisorRepository;
 
 import java.util.Collections;
 

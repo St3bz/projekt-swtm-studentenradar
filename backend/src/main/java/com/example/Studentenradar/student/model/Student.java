@@ -1,12 +1,12 @@
-package com.example.studentenradar.student.model;
+package com.example.Studentenradar.student.model;
 
 import java.util.List;
 
-import com.example.studentenradar.contract.model.StudentContract;
-import com.example.studentenradar.contract.model.Work;
-import com.example.studentenradar.hardware.model.Hardware;
-import com.example.studentenradar.project.model.Project;
-import com.example.studentenradar.supervisor.model.Supervisor;
+import com.example.Studentenradar.contract.model.StudentContract;
+import com.example.Studentenradar.contract.model.Work;
+import com.example.Studentenradar.hardware.model.Hardware;
+import com.example.Studentenradar.project.model.Project;
+import com.example.Studentenradar.supervisor.model.Supervisor;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.CascadeType;

@@ -1,4 +1,4 @@
-package com.example.studentenradar.hardware.controller;
+package com.example.Studentenradar.hardware.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.studentenradar.hardware.model.Hardware;
-import com.example.studentenradar.hardware.service.HardwareBusinessService;
+import com.example.Studentenradar.hardware.model.Hardware;
+import com.example.Studentenradar.hardware.service.HardwareBusinessService;
 
 @RestController
 @RequestMapping("/api/v1/hardware")
