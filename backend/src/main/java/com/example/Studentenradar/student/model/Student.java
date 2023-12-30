@@ -54,12 +54,12 @@ public class Student {
     @JoinColumn(name = "education_id", referencedColumnName = "id")
     private Education education;
 
-    @JsonBackReference
+    @JsonBackReference(value="student-project")
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "project_id", referencedColumnName = "id")
     private Project project;
     
-    @JsonBackReference
+    @JsonBackReference(value="student-supervisor")
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "supervisor_id", referencedColumnName = "id")
     private Supervisor supervisor;

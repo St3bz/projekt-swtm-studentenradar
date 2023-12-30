@@ -31,8 +31,8 @@ public class Project {
     @Column
     private String description;
 
-    @JsonManagedReference               // avoid endless recursion in JSON
-    @OneToMany(mappedBy = "project")    // bidirectional
+    @JsonManagedReference(value="student-project")      // avoid endless recursion in JSON
+    @OneToMany(mappedBy = "project")                    // bidirectional
     private List<Student> students = new ArrayList<>();
 
     public Project() {

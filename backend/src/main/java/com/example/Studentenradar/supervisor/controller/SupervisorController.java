@@ -44,18 +44,29 @@ public class SupervisorController {
         return service.getById(id);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public boolean deleteSupervisor(@PathVariable(name = "id") int id) {
         return service.deleteSupervisor(id);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public Supervisor updateProject(@RequestBody Supervisor supervisor, @PathVariable(name = "id") int id) {
         return service.updateSupervisor(id, supervisor);
     }
 
-    @GetMapping("/{id}/members")
-    public List<Student> getSupervisorMembersById(@PathVariable(name = "id") int id) {
-        return service.getSupervisorMembersById(id);
+    @GetMapping("/{id}/students")
+    public List<Student> getSupervisedStudents(@PathVariable(name = "id") int id) {
+        return service.getSupervisedStudents(id);
+    }
+
+    // not needed
+    @PostMapping("/{id}/student")
+    public List<Student> addSupervisedStudent(@PathVariable(name = "id") int id, @RequestBody int studentId){
+        return service.addSupervisedStudent(id, studentId);
+    }
+
+    @DeleteMapping("/{id}/student")
+    public boolean removeSupervisedStudent(@PathVariable(name = "id") int id, @RequestBody int studentId) {
+        return service.removeSupervisedStudent(id, studentId);
     }
 }

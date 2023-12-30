@@ -18,7 +18,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "supervisor")
 @JsonIgnoreProperties("students")
-public class Supervisor {
+public class Supervisor{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,8 +31,8 @@ public class Supervisor {
     @Column(name = "last_name")
     private String lastName;
 
-    @JsonManagedReference                   // avoid endless recursion in JSON
-    @OneToMany(mappedBy = "supervisor")     // bidirectional
+    @JsonManagedReference(value="student-supervisor")       // avoid endless recursion in JSON
+    @OneToMany(mappedBy = "supervisor")                     // bidirectional
     private List<Student> students = new ArrayList<>();
 
     public Supervisor() {

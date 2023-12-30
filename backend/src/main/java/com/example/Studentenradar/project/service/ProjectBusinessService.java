@@ -9,16 +9,20 @@ import org.springframework.stereotype.Service;
 import com.example.studentenradar.project.model.Project;
 import com.example.studentenradar.project.repository.ProjectRepository;
 import com.example.studentenradar.student.model.Student;
+import com.example.studentenradar.student.repository.StudentRepository;
+
 import java.util.Collections;
 
 @Service
 public class ProjectBusinessService {
     private ProjectRepository projectRepository;
+    private StudentRepository studentRepository;
 
     @Autowired
-    ProjectBusinessService(ProjectRepository projectRepository) {
+    ProjectBusinessService(ProjectRepository projectRepository, StudentRepository studentRepository) {
         super();
         this.projectRepository = projectRepository;
+        this.studentRepository = studentRepository;
     }
 
     public Optional<Project> getById(int id) {
@@ -59,12 +63,42 @@ public class ProjectBusinessService {
         return null;
     }
 
-    public List<Student> getProjectMembersById(int id){
-        Optional<Project> project = getById(id);
+    public List<Student> getProjectMembers(int id){
+        Optional<Project> project = projectRepository.findById(id);
 
         if (project.isPresent()){
             return project.get().getStudents();
         }
         return Collections.emptyList();
+    }
+
+    public List<Student> addProjectMember(int id, int studentId){
+        Optional<Project> project = projectRepository.findById(id);
+        Optional<Student> student = studentRepository.findById(studentId);
+
+        if (student.isPresent() && project.isPresent()){
+            if (student.get().getProject() == null){
+                student.get().setProject(project.get());
+                project.get().addStudent(student.get());
+
+                studentRepository.save(student.get());
+            }
+            return project.get().getStudents();
+        }
+        return Collections.emptyList();
+    }
+
+    public boolean removeProjectMember(int id, int studentId) {
+        Optional<Project> project = projectRepository.findById(id);
+        Optional<Student> student = studentRepository.findById(studentId);
+
+        if (student.isPresent() && project.isPresent() && (student.get().getProject() == project.get())){
+                student.get().setProject(null);
+                project.get().removeStudent(student.get());
+
+                studentRepository.save(student.get());
+                return true; 
+        }
+        return false;
     }
 }

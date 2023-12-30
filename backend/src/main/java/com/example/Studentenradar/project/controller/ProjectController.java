@@ -50,18 +50,28 @@ public class ProjectController {
         return service.getById(id);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public boolean deleteProject(@PathVariable(name = "id") int id) {
         return service.deleteProject(id);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public Project updateProject(@RequestBody Project project, @PathVariable(name = "id") int id) {
         return service.updateProject(id, project);
     }
 
     @GetMapping("/{id}/members")
-    public List<Student> getProjectMembersById(@PathVariable(name = "id") int id) {
-        return service.getProjectMembersById(id);
+    public List<Student> getProjectMembers(@PathVariable(name = "id") int id) {
+        return service.getProjectMembers(id);
+    }
+
+    @PostMapping("/{id}/member")
+    public List<Student> addProjectMember(@PathVariable(name = "id") int id, @RequestBody int studentId){
+        return service.addProjectMember(id, studentId);
+    }
+
+    @DeleteMapping("/{id}/member")
+    public boolean removeProjectMember(@PathVariable(name = "id") int id, @RequestBody int studentId) {
+        return service.removeProjectMember(id, studentId);
     }
 }

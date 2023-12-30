@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.studentenradar.student.model.Student;
+import com.example.studentenradar.student.repository.StudentRepository;
 import com.example.studentenradar.supervisor.model.Supervisor;
 import com.example.studentenradar.supervisor.repository.SupervisorRepository;
 
@@ -15,11 +16,13 @@ import java.util.Collections;
 @Service
 public class SupervisorBusinessService {
     private SupervisorRepository supervisorRepository;
+    private StudentRepository studentRepository;
 
     @Autowired
-    SupervisorBusinessService(SupervisorRepository supervisorRepository) {
+    SupervisorBusinessService(SupervisorRepository supervisorRepository, StudentRepository studentRepository) {
         super();
         this.supervisorRepository = supervisorRepository;
+        this.studentRepository = studentRepository;
     }
 
     public Optional<Supervisor> getById(int id) {
@@ -56,12 +59,42 @@ public class SupervisorBusinessService {
         return null;
     }
 
-    public List<Student> getSupervisorMembersById(int id) {
+    public List<Student> getSupervisedStudents(int id) {
         Optional<Supervisor> supervisor = getById(id);
 
         if (supervisor.isPresent()) {
             return supervisor.get().getStudents();
         }
         return Collections.emptyList();
+    }
+
+    public List<Student> addSupervisedStudent(int id, int studentId){
+        Optional<Supervisor> supervisor = supervisorRepository.findById(id);
+        Optional<Student> student = studentRepository.findById(studentId);
+
+        if (student.isPresent() && supervisor.isPresent()){
+            if (student.get().getSupervisor() == null){
+                student.get().setSupervisor(supervisor.get());
+                supervisor.get().addStudent(student.get());
+
+                studentRepository.save(student.get());
+            }
+            return supervisor.get().getStudents();
+        }
+        return Collections.emptyList();
+    }
+
+    public boolean removeSupervisedStudent(int id, int studentId) {
+        Optional<Supervisor> supervisor = supervisorRepository.findById(id);
+        Optional<Student> student = studentRepository.findById(studentId);
+
+        if (student.isPresent() && supervisor.isPresent() &&  (student.get().getSupervisor() == supervisor.get())){
+                student.get().setSupervisor(null);
+                supervisor.get().removeStudent(student.get());
+
+                studentRepository.save(student.get());
+                return true; 
+        }
+        return false;
     }
 }
