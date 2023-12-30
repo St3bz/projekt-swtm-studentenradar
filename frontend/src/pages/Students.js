@@ -7,7 +7,7 @@ import useFetch from './useFetch';
 
 const Students = () => {
     const {id} = useParams();
-    const {data:students, error, isPending} = useFetch('http://localhost:8000/students/' + id);
+    const {data:students, error, isPending} = useFetch('http://localhost:3306/students/' + id);
     return ( 
         <div>
             

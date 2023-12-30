@@ -7,7 +7,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import useFetch from './useFetch';
 const ShowTeam = () => {
     const {id} = useParams();
-    const {data:team, error, isPending} = useFetch('http://localhost:8000/team/' + id);
+    const {data:team, error, isPending} = useFetch('http://localhost:3306/team/' + id);
     const navigate = useNavigate();
 	const goBack = () => {
 		navigate('/teams', {replace: true});
