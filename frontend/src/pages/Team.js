@@ -1,9 +1,9 @@
 import Searchbar from './Searchbar';
 import TeamView from './TeamView';
-import ShowTeam from './ShowTeam';
+//import ShowTeam from './ShowTeam';
 import useFetch from './useFetch';
 const Teams = () => {
-    const {data:team, isPending, error} = useFetch('http://localhost:3306/team')
+    const {data:team, isPending, error} = useFetch('/api/v1/project')
     return (  
         <div className="Teams">
             <div className="title">

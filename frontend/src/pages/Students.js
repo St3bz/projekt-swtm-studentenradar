@@ -8,6 +8,22 @@ import useFetch from './useFetch';
 const Students = () => {
     const {id} = useParams();
     const {data:students, error, isPending} = useFetch('http://localhost:3306/students/' + id);
+
+    fetch('http://localhost:3306/students')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log('Data:', data);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+
+
     return ( 
         <div>
             

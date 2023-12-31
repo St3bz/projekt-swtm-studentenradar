@@ -6,7 +6,7 @@ import useFetch from './useFetch';
 const ShowTimeMgmt = () => {
     const {id} = useParams();
     const navigate = useNavigate();
-    const {data:time, error, isPending} = useFetch('http://localhost:8000/time');
+    const {data:time, error, isPending} = useFetch('/api/v1/work/' + id);
     const goBack = () => {
 		navigate('/profile', {replace: true});
 	}
