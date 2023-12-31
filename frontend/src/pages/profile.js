@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import profileIcon from '../images/profile_icon.png';
 import time from '../images/time.png';
 import { useParams, useNavigate, Link } from 'react-router-dom';
