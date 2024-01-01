@@ -51,7 +51,7 @@ const TeamView = (props) => {
                             <div className="member"></div>
                             <div className="information">
                                 <div><img src={User} className="iconTeams" alt="user" />   </div>
-                                <div><img src={Calendar} className="iconTeams" alt="calendar" />   Kein Zeitraum </div>
+                                <div><img src={Calendar} className="iconTeams" alt="calendar" />   Kein Zeitraum</div>
                                 <div><img src={Warn} className="iconTeams" alt="warn" />   Keine Auswahl</div>
                             </div>
                         </Link>
