@@ -1,9 +1,9 @@
-package com.example.studentenradar.project.model;
+package com.example.Studentenradar.project.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.studentenradar.student.model.Student;
+import com.example.Studentenradar.student.model.Student;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 

@@ -1,6 +1,6 @@
-package com.example.studentenradar.contract.model;
+package com.example.Studentenradar.contract.model;
 
-import com.example.studentenradar.student.model.Student;
+import com.example.Studentenradar.student.model.Student;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;

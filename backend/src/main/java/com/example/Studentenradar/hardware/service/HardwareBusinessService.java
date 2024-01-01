@@ -1,4 +1,4 @@
-package com.example.studentenradar.hardware.service;
+package com.example.Studentenradar.hardware.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.studentenradar.hardware.model.Hardware;
-import com.example.studentenradar.hardware.repository.HardwareRepository;
+import com.example.Studentenradar.hardware.model.Hardware;
+import com.example.Studentenradar.hardware.repository.HardwareRepository;
 
 @Service
 public class HardwareBusinessService {

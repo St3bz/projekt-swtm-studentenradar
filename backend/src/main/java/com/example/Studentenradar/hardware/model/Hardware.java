@@ -1,8 +1,8 @@
-package com.example.studentenradar.hardware.model;
+package com.example.Studentenradar.hardware.model;
 
 import java.util.List;
 
-import com.example.studentenradar.student.model.Student;
+import com.example.Studentenradar.student.model.Student;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
