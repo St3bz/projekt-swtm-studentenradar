@@ -1,4 +1,4 @@
-package com.example.Studentenradar.project.controller;
+package com.example.studentenradar.project.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.Studentenradar.project.model.Project;
-import com.example.Studentenradar.project.service.ProjectBusinessService;
-import com.example.Studentenradar.student.model.Student;
+import com.example.studentenradar.project.model.Project;
+import com.example.studentenradar.project.service.ProjectBusinessService;
+import com.example.studentenradar.student.model.Student;
 
 @RestController
 @RequestMapping("/api/v1/projects")

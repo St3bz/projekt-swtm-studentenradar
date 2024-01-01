@@ -1,4 +1,4 @@
-package com.example.Studentenradar.student.controller;
+package com.example.studentenradar.student.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.Studentenradar.hardware.model.Hardware;
-import com.example.Studentenradar.student.model.Address;
-import com.example.Studentenradar.student.model.Education;
-import com.example.Studentenradar.student.model.Student;
-import com.example.Studentenradar.student.service.StudentBusinessService;
-import com.example.Studentenradar.supervisor.model.Supervisor;
+import com.example.studentenradar.hardware.model.Hardware;
+import com.example.studentenradar.student.model.Address;
+import com.example.studentenradar.student.model.Education;
+import com.example.studentenradar.student.model.Student;
+import com.example.studentenradar.student.service.StudentBusinessService;
+import com.example.studentenradar.supervisor.model.Supervisor;
 
 @RestController
 @RequestMapping("/api/v1/students")

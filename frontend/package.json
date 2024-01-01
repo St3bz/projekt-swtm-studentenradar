@@ -44,9 +44,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": {
-    "/api/v1": {
-      "target": "http://phpmyadmin:3306"
-    }
-  }
+  "proxy": "http://localhost:3306"
 }

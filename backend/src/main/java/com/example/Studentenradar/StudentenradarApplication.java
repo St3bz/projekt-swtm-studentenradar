@@ -1,4 +1,4 @@
-package com.example.Studentenradar;
+package com.example.studentenradar;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

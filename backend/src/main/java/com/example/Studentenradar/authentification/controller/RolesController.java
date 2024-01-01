@@ -1,4 +1,4 @@
-package com.example.Studentenradar.authentification.controller;
+package com.example.studentenradar.authentification.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;

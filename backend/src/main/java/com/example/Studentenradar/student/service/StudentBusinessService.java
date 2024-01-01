@@ -1,4 +1,4 @@
-package com.example.Studentenradar.student.service;
+package com.example.studentenradar.student.service;
 
 import java.util.Collections;
 import java.util.List;
@@ -7,13 +7,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.Studentenradar.hardware.model.Hardware;
-import com.example.Studentenradar.student.model.Address;
-import com.example.Studentenradar.student.model.Student;
-import com.example.Studentenradar.student.repository.AddressRepository;
-import com.example.Studentenradar.student.repository.StudentRepository;
-import com.example.Studentenradar.supervisor.model.Supervisor;
-import com.example.Studentenradar.supervisor.repository.SupervisorRepository;
+import com.example.studentenradar.hardware.model.Hardware;
+import com.example.studentenradar.student.model.Address;
+import com.example.studentenradar.student.model.Student;
+import com.example.studentenradar.student.repository.AddressRepository;
+import com.example.studentenradar.student.repository.StudentRepository;
+import com.example.studentenradar.supervisor.model.Supervisor;
+import com.example.studentenradar.supervisor.repository.SupervisorRepository;
 
 @Service
 public class StudentBusinessService {

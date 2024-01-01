@@ -4,7 +4,7 @@ import Calendar from '../images/calendar.png';
 import goBackBtn from '../images/backButton.png';
 import Add from '../images/add.png';
 import { useParams, useNavigate } from 'react-router-dom';
-import useFetch from './useFetch';
+/* import useFetch from './useFetch'; */
 const ShowTeam = () => {
     const {id} = useParams();
     /* const {data:project, error, isPending} = useFetch('/api/v1/project/' + id);
@@ -13,7 +13,7 @@ const ShowTeam = () => {
     const [students, setStudents] = useState([])
     const [supervisors, setSupervisors] = useState([])
     const fetchProjectData = () => {
-        fetch('/api/v1/project/')
+        fetch('api/v1/project', id)
         .then(response => {
             return response.json()
         })
@@ -22,7 +22,7 @@ const ShowTeam = () => {
         })
     }
     const fetchStudentData = () => {
-        fetch('/api/v1/student/')
+        fetch('api/v1/student')
         .then(response => {
             return response.json()
         })
@@ -31,7 +31,7 @@ const ShowTeam = () => {
         })
     }
     const fetchSupervisorData = () => {
-        fetch('/api/v1/supervisor/')
+        fetch('api/v1/supervisor')
         .then(response => {
             return response.json()
         })
@@ -51,8 +51,8 @@ const ShowTeam = () => {
 	}
     return (
         <div className="Teams">
-            {error && <div>{error}</div>}
-            {isPending && <div>Loading...</div>}
+           {/*  {error && <div>{error}</div>}
+            {isPending && <div>Loading...</div>} */}
             {project && (
                 <div>
                     <div className='goBackButton'>
@@ -74,7 +74,7 @@ const ShowTeam = () => {
                         <div className='boxes'>
                             <div className='projMember'>
                                 <table>
-                                <thead>
+                                    <thead>
                                        <tr>
                                             <th>Vorname</th>
                                             <th>Nachname</th>
