@@ -1,4 +1,4 @@
-import { useNavigate, useLocation, BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import { useNavigate, useLocation, Routes, Route} from "react-router-dom";
 import Keycloak from "keycloak-js";
 import React, { useEffect } from 'react';
 import Sidebar from "./pages/Sidebar.js";

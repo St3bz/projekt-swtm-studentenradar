@@ -17,7 +17,7 @@ const TimeMgmt = () => {
 
         setIsPending(true);
 
-        fetch('http://localhost:8000/team', {
+        fetch('/api/v1/work', {
             method: 'POST',
             headers: {'content-type': 'application/json'},
             body: JSON.stringify(time)
