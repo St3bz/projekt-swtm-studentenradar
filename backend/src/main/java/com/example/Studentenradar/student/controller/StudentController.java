@@ -101,7 +101,7 @@ public class StudentController {
     }
 
     //education
-    /*@GetMapping("/{id}/education")
+    /* @GetMapping("/{id}/education")
     public Education getStudentEducation(@PathVariable(name = "id") int id){
         return service.getStudentEducation(id);
     }
@@ -114,6 +114,6 @@ public class StudentController {
     @PutMapping("/{id}/education")
     public Education changeStudentEducation(@RequestBody Education education, @PathVariable(name = "id") int id){
         return service.changeStudentEducation(id);
-    }
-    */
+    } */
+    
 }

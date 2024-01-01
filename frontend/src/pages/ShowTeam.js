@@ -12,37 +12,49 @@ const ShowTeam = () => {
     const [project, setProject] = useState([])
     const [students, setStudents] = useState([])
     const [supervisors, setSupervisors] = useState([])
-    const fetchProjectData = () => {
-        fetch('api/v1/project', id)
+    const fetchProjectData = (id) => {
+        fetch('http://localhost:8081/api/v1/projects/' + id, {
+            method: 'GET',
+        })
         .then(response => {
             return response.json()
         })
         .then(data => {
-            setProject(data)
+            setProject(data);
+            console.log('test');
+            console.log(data)
         })
-    }
-    const fetchStudentData = () => {
-        fetch('api/v1/student')
+    } 
+    const fetchStudentData = (id) => {
+        fetch('http://localhost:8081/api/v1/projects/' + id + '/members' , {
+            method: 'GET',
+        })
         .then(response => {
             return response.json()
         })
         .then(data => {
-            setStudents(data)
+            setStudents(data);
+            console.log('testStud');
+            console.log(data)
         })
-    }
-    const fetchSupervisorData = () => {
-        fetch('api/v1/supervisor')
+    } 
+    const fetchSupervisorData = (id) => {
+        fetch('http://localhost:8081/api/v1/supervisors/' + id, {
+            method: 'GET',
+        })
         .then(response => {
             return response.json()
         })
         .then(data => {
             setSupervisors(data)
+            console.log('testSuper');
+            console.log(data)
         })
-    }
+    } 
     useEffect(() => {
-        fetchProjectData();
-        fetchStudentData();
-        fetchSupervisorData()
+        fetchProjectData(id);
+        fetchStudentData(id);
+        fetchSupervisorData(id) 
     }, [])
 
     const navigate = useNavigate();
@@ -67,7 +79,7 @@ const ShowTeam = () => {
                             </div>
                         </div>
                         <div className='projInfo'>
-                            <div><img src={User} className="iconsTeam" alt="user" /> {supervisors.first_name}{supervisors.last_name}</div>
+                            <div><img src={User} className="iconsTeam" alt="user" /> {supervisors.firstName} {supervisors.lastName}</div>
                             <div><img src={Calendar} className="iconsTeam" alt="calendar" /> Kein Zeitraum</div>
                             <div><img src={Add} className="iconsTeam" alt="add" /></div>
                         </div>
@@ -80,18 +92,14 @@ const ShowTeam = () => {
                                             <th>Nachname</th>
                                         </tr> 
                                     </thead>
-                                    <tbody>
-                                        {students.map(student => (
-                                            <tr key={student.id}>
-                                                <td>{student.firstName}</td>
-                                                <td>{student.lastName}</td>
-                                            </tr>
-                                        ))}
+                                    <tbody key={students.members}>
+                                        <tr>{students.firstName}</tr>
+                                        <tr>{students.lastName}</tr>
                                     </tbody>
                                 </table>
                             </div>
-                            <div className='projDetails'>
-                                <p>{project.description}</p>
+                            <div className='projDetails' key={project.id}>
+                                <b>{project.description}</b>
                             </div>
                         </div>
                     </div>

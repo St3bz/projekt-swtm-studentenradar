@@ -2,40 +2,29 @@ import React, {useState, useEffect} from 'react';
 import User from '../images/icon_user.png'
 import Calendar from '../images/calendar.png'
 import Warn from '../images/warning.png';
-import { Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 const TeamView = (props) => {
     const teamView = props.team; 
-    /* const [projects, setProjects] = useState([])
-    const [student, setStudent] = useState([]) */
-    /* const fetchProjectData = () => {
-        fetch('http://localhost:8081/api/v1/projects', {
+    const {id} = useParams();
+    const [supervisors, setSupervisors] = useState([])
+
+    const fetchSupervisorData = (id) => {
+        fetch('http://localhost:8081/api/v1/supervisors/' + id, {
             method: 'GET',
         })
         .then(response => {
             return response.json()
         })
-        .then((actualData) => {
-            console.log(actualData)
-        })
         .then(data => {
-            setProjects(data)
-            console.log(projects)
+            setSupervisors(data)
+            console.log('testSuper');
+            console.log(data)
         })
     } 
-    const fetchStudentData = () => {
-        fetch('api/v1/student')
-        .then(response => {
-            return response.json()
-        })
-        .then(data => {
-            setStudent(data)
-        })
-    }
     useEffect(() => {
-        fetchProjectData();
-        fetchStudentData()
-    }, [])*/
+        fetchSupervisorData(id) 
+    }, [])
 
     return (  
         <div className="teamField">
@@ -50,7 +39,7 @@ const TeamView = (props) => {
                             </div>
                             <div className="member"></div>
                             <div className="information">
-                                <div><img src={User} className="iconTeams" alt="user" />   </div>
+                                <div><img src={User} className="iconTeams" alt="user" /> {supervisors.firstName} {supervisors.lastName} </div>
                                 <div><img src={Calendar} className="iconTeams" alt="calendar" />   Kein Zeitraum </div>
                                 <div><img src={Warn} className="iconTeams" alt="warn" />   Keine Auswahl</div>
                             </div>

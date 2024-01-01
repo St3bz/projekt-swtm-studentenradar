@@ -84,7 +84,7 @@ function App() {
           <Route path="/add" element={<AddStudent />} />
           <Route path="/teams" element={<Team />} />
           <Route path="/teams/:id" element={<ShowTeam />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/:id" element={<Profile />} />
           <Route path="/time/addtime" element={<AddTime />} />
           <Route path="/time" element={<Time />} />
         </Routes>
