@@ -9,6 +9,7 @@ const Teams = () => {
     const [projects, setProjects] = useState([])
     const [filteredProjects, setFilteredProjects] = useState([]);
     const navigate = useNavigate();
+    const [searchTerm, setSearchTerm] = useState('');
 
     const fetchProjectData = () => {
         fetch('http://localhost:8081/api/v1/projects', {
@@ -29,6 +30,14 @@ const Teams = () => {
     }, [])
 
     const handleSearch = (searchTerm) => {
+        setSearchTerm(searchTerm);
+
+        // Reset filteredProjects when the search term is empty
+        if (searchTerm.trim() === '') {
+            setFilteredProjects([]);
+            return;
+        }
+
         const filtered = projects.filter((project) =>
           project.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
@@ -39,12 +48,42 @@ const Teams = () => {
         }
     };
 
+    const handleSearchSuggestions = (searchTerm) => {
+        // Filter projects for search suggestions
+        const suggestions = projects.filter((project) =>
+          project.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setFilteredProjects(suggestions);
+    };
+
+    const renderResults = () => {
+        if (filteredProjects.length === 0) {
+          return <p>No matching teams found for "{searchTerm}".</p>;
+        } else if (filteredProjects.length === 1) {
+          return <TeamView team={filteredProjects} />;
+        } else {
+            return (
+                <div>
+                  <p>Multiple matching teams found for "{searchTerm}". Select a team:</p>
+                  <ul>
+                    {filteredProjects.map((project) => (
+                      <li key={project.id} onClick={() => navigate(`/teams/${project.id}`)}>
+                        {project.name}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+            );
+        }
+      };
+
     return (  
         <div className="Teams">
             <div className="title">
                 <b>Teams</b>
-                <Searchbar handleSearch={handleSearch}/>
+                <Searchbar handleSearch={handleSearch} handleSuggestions={handleSearchSuggestions} />
             </div>
+            {renderResults()}
             {/* {error && <div>{error}</div>}
             {isPending && <div>Loading...</div>} */}
             {projects  && <TeamView team={projects} /> }

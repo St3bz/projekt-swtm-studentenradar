@@ -1,11 +1,18 @@
 import search from '../images/search_icon.png';
 import React, { useState } from 'react';
 
-const Searchbar = ({ handleSearch }) => {
+const Searchbar = ({ handleSearch, handleSuggestions }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleChange = (e) => {
-    setSearchTerm(e.target.value);
+    const term = e.target.value;
+    setSearchTerm(term);
+    handleSuggestions(term);
+
+    // If the search term is cleared, reset the search term
+    if (term.trim() === '') {
+      handleSearch('');
+    }
   };
 
   const handleSubmit = (e) => {
@@ -19,7 +26,7 @@ const Searchbar = ({ handleSearch }) => {
       <input
         type="text" placeholder="Search teams..." value={searchTerm} onChange={handleChange}
       />
-      <button type="submit">Search</button>
+      <button type="submit">Search</button>    
     </form>
   );
 };
