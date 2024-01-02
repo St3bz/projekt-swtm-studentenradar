@@ -28,10 +28,9 @@ const StudentsEdit = () => {
   const toggleCheckbox = (id) => {
     setSelectedIds(prevSelectedIds => {
       if (prevSelectedIds.includes(id)) {
-        // Wenn die ID bereits ausgewählt ist, entferne sie aus der Liste
+       
         return prevSelectedIds.filter(selectedId => selectedId !== id);
       } else {
-        // Wenn die ID nicht ausgewählt ist, füge sie zur Liste hinzu
         return [...prevSelectedIds, id];
       }
     });
@@ -78,7 +77,6 @@ const StudentsEdit = () => {
             <table className="table">
               <thead>
                 <tr>
-                  <th>ID</th>
                   <th>Name</th>
                   <th>Vorname</th>
                   <th>Projekt</th>
@@ -102,7 +100,6 @@ const StudentsEdit = () => {
               <tbody>
                 {students.map((student) => (
                   <tr key={student.id}>
-                    <td>{student.id}</td>
                     <td>{student.lastName}</td>
                     <td>{student.firstName}</td>
                     <td>-</td>

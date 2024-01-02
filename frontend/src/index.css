@@ -143,6 +143,7 @@ form{
   border-radius: 0.76864vmin; /* 10px */
   margin-left: 20%;
   margin-top: 2%;
+  overflow-y: auto;
 
 }
 /* CSS */
@@ -251,6 +252,12 @@ form{
 }
 #field-first-b {
   margin-left: 2.5vmin; /* 25px */ /* Adjust the margin-left value as needed */
+}
+
+#field-first-c {
+  margin-left: 6vmin;
+  /* 25px */
+  /* Adjust the margin-left value as needed */
 }
 
 .second-row{

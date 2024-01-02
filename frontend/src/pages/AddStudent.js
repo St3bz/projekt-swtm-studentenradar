@@ -26,6 +26,8 @@ const AddStudent = () => {
       [field]: value,
     }));
   };
+
+  
   const handleAddStudent = () => {
     fetch('http://localhost:8081/api/v1/students', {
       method: 'POST',
@@ -38,7 +40,7 @@ const AddStudent = () => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        navigate('/StudentsEdit', { replace: true });
+        navigate('/Students', { replace: true });
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -82,7 +84,7 @@ const AddStudent = () => {
             <p>Vorname</p>
             <input
                 type="text"
-                id="field-first-a"
+                id="field-first-c"
                 className="q"
                 value={newStudent.name}
                 onChange={(e) => handleInputChange('firstName', e.target.value)}
@@ -111,7 +113,13 @@ const AddStudent = () => {
             </div>
             <div className="third-row-b">
               <p>Semester</p>
-              <input type="text" id="field-third-c" className="q" />
+              <input
+                type="text"
+                id="field-third-c"
+                className="q"
+                value={newStudent.name}
+                onChange={(e) => handleInputChange('semester', e.target.value)}
+              />
             </div>
           </div>
 

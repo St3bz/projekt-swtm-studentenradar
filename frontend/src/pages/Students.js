@@ -48,7 +48,6 @@ const Students = () => {
             <table className="table">
               <thead>
                 <tr>
-                  <th>ID</th>
                   <th>Name</th>
                   <th>Vorname</th>
                   <th>Projekt</th>
@@ -57,7 +56,6 @@ const Students = () => {
               <tbody>
                 {students.map((student) => (
                   <tr key={student.id}>
-                    <td>{student.id}</td>
                     <td>{student.lastName}</td>
                     <td>{student.firstName}</td>
                     <td>-</td>
