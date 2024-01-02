@@ -1,5 +1,8 @@
 package com.example.studentenradar.contract.service;
 
+import java.time.LocalDate;
+import java.time.temporal.WeekFields;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,15 +12,21 @@ import org.springframework.stereotype.Service;
 import com.example.studentenradar.contract.model.Work;
 import com.example.studentenradar.contract.model.WorkId;
 import com.example.studentenradar.contract.repository.WorkRepository;
+import com.example.studentenradar.student.model.Student;
+import com.example.studentenradar.student.service.StudentBusinessService;
 
 @Service
 public class WorkBusinessService {
     private WorkRepository workRepository;
 
+    private StudentBusinessService studentBusinessService; 
+
     @Autowired
-    WorkBusinessService(WorkRepository workRepository) {
+    WorkBusinessService(WorkRepository workRepository,
+                        StudentBusinessService studentBusinessService) {
         super();
         this.workRepository = workRepository;
+        this.studentBusinessService = studentBusinessService;
     }
 
     public Optional<Work> getById(WorkId id) {
@@ -28,27 +37,43 @@ public class WorkBusinessService {
         return workRepository.findAll();
     }
 
-    public Work addWork(Work work) {
+    public Work addHours(int studentId, int hours) {
+        LocalDate currentDate = LocalDate.now();
+        int week = currentDate.get(WeekFields.ISO.weekOfWeekBasedYear());
+
+        WorkId workId = new WorkId(week, studentId);
+
+        if (workRepository.findById(workId).isPresent()){
+            return null;
+        }
+        Work work = new Work(workId, hours);
+        work.setStudent(studentBusinessService.getById(studentId).get());
         return workRepository.save(work);
     }
 
+    // not needed ?
     public boolean deleteWork(WorkId id) {
         Optional<Work> work = workRepository.findById(id);
 
         if (work.isPresent()) {
             workRepository.delete(work.get());
+        //    Student student = studentBusinessService.getById(id.getStudentId());
+            
             return true;
         }
         return false;
     }
 
-    public Work updateWork(WorkId id, Work updatedWork) {
-        Optional<Work> work = workRepository.findById(id);
+    public Work updateWork(int studentId, int hours) {
+        LocalDate currentDate = LocalDate.now();
+        int week = currentDate.get(WeekFields.ISO.weekOfWeekBasedYear());
 
-        if (work.isPresent()) {
-            Work foundWork = work.get();
-            foundWork.setWorkingHours(updatedWork.getWorkingHours());
-            return workRepository.save(foundWork);
+        WorkId workId = new WorkId(week, studentId);
+
+        if (workRepository.findById(workId).isPresent()){
+            Work work = workRepository.findById(workId).get();
+            work.setWorkingHours(hours);
+            return workRepository.save(work);
         }
         return null;
     }
