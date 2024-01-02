@@ -3,6 +3,7 @@ package com.example.studentenradar.hardware.model;
 import java.util.List;
 
 import com.example.studentenradar.student.model.Student;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,6 +15,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "hardware")
+@JsonIgnoreProperties("students")
 public class Hardware {
 
     @Id
@@ -61,6 +63,22 @@ public class Hardware {
 
     public void setSpecifications(String specifications) {
         this.specifications = specifications;
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+
+    public void addStudent(Student student){
+        students.add(student);
+    }
+
+    public void removeStudent(Student student){
+        students.remove(student);
     }
 
     @Override

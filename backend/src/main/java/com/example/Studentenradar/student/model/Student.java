@@ -1,5 +1,6 @@
 package com.example.studentenradar.student.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.example.studentenradar.contract.model.StudentContract;
@@ -8,6 +9,8 @@ import com.example.studentenradar.hardware.model.Hardware;
 import com.example.studentenradar.project.model.Project;
 import com.example.studentenradar.supervisor.model.Supervisor;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -19,11 +22,13 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "student")
+@JsonIgnoreProperties("ownedHardware")
 public class Student {
     
     @Id
@@ -41,7 +46,7 @@ public class Student {
     private String email;
 
     @Column(name = "is_known")
-    private int isKnown;
+    private Boolean isKnown;
 
     @Column
     private String remark;
@@ -74,13 +79,13 @@ public class Student {
     @OneToOne(cascade = CascadeType.ALL)
     private StudentContract studentContract;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Work work;
+    @OneToMany(mappedBy = "student") 
+    private List<Work> works = new ArrayList<>();
 
     public Student() {
     }
 
-    public Student(int id, String firstName, String lastName, String email, int isKnown, String remark) {
+    public Student(int id, String firstName, String lastName, String email, Boolean isKnown, String remark) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -121,11 +126,11 @@ public class Student {
         this.email = email;
     }
 
-    public int getIsKnown() {
+    public Boolean getIsKnown() {
         return isKnown;
     }
 
-    public void setIsKnown(int isKnown) {
+    public void setIsKnown(Boolean isKnown) {
         this.isKnown = isKnown;
     }
 
@@ -175,6 +180,14 @@ public class Student {
 
     public void setOwnedHardware(List<Hardware> ownedHardware) {
         this.ownedHardware = ownedHardware;
+    }
+
+    public void addHardware(Hardware hardware){
+        ownedHardware.add(hardware);
+    }
+
+    public void removeHardware(Hardware hardware){
+        ownedHardware.remove(hardware);
     }
 
     @Override
