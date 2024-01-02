@@ -1,11 +1,15 @@
 import React, {useState, useEffect} from 'react';
-import Searchbar from './Searchbar';
+import {useNavigate} from 'react-router-dom';
+import Searchbar from './TeamSearchbar';
 import TeamView from './TeamView';
 //import ShowTeam from './ShowTeam';
 /* import useFetch from './useFetch'; */
 const Teams = () => {
     /* const {data:team, isPending, error} = useFetch('/api/v1/project') */
     const [projects, setProjects] = useState([])
+    const [filteredProjects, setFilteredProjects] = useState([]);
+    const navigate = useNavigate();
+
     const fetchProjectData = () => {
         fetch('http://localhost:8081/api/v1/projects', {
             method: 'GET',
@@ -23,11 +27,23 @@ const Teams = () => {
         fetchProjectData();
         /* fetchStudentData() */
     }, [])
+
+    const handleSearch = (searchTerm) => {
+        const filtered = projects.filter((project) =>
+          project.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setFilteredProjects(filtered);
+
+        if (filtered.length === 1) {
+            navigate(`/teams/${filtered[0].id}`);
+        }
+    };
+
     return (  
         <div className="Teams">
             <div className="title">
                 <b>Teams</b>
-                <Searchbar />
+                <Searchbar handleSearch={handleSearch}/>
             </div>
             {/* {error && <div>{error}</div>}
             {isPending && <div>Loading...</div>} */}
