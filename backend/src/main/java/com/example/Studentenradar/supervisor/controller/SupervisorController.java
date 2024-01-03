@@ -1,4 +1,4 @@
-package com.example.studentenradar.supervisor.controller;
+package com.example.Studentenradar.supervisor.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.studentenradar.student.model.Student;
-import com.example.studentenradar.supervisor.model.Supervisor;
-import com.example.studentenradar.supervisor.service.SupervisorBusinessService;
+import com.example.Studentenradar.student.model.Student;
+import com.example.Studentenradar.supervisor.model.Supervisor;
+import com.example.Studentenradar.supervisor.service.SupervisorBusinessService;
 
 @RestController
 @RequestMapping("/api/v1/supervisors")

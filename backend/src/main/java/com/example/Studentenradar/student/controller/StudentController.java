@@ -1,4 +1,4 @@
-package com.example.studentenradar.student.controller;
+package com.example.Studentenradar.student.controller;
 
 import java.util.List;
 import java.util.Optional;

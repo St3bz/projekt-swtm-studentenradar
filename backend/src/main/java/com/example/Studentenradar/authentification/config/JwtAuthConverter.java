@@ -1,4 +1,4 @@
-package com.example.studentenradar.authentification.config;
+package com.example.Studentenradar.authentification.config;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.NonNull;

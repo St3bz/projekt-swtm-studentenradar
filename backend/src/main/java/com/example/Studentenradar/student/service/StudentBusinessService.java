@@ -1,4 +1,4 @@
-package com.example.studentenradar.student.service;
+package com.example.Studentenradar.student.service;
 
 import java.util.Collections;
 import java.util.List;
