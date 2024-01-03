@@ -59,12 +59,10 @@ const Teams = () => {
     const renderResults = () => {
         if (filteredProjects.length === 0) {
           return <p>No matching teams found for "{searchTerm}".</p>;
-        } else if (filteredProjects.length === 1) {
-          return <TeamView team={filteredProjects} />;
-        } else {
+        } else{ 
             return (
                 <div>
-                  <p>Multiple matching teams found for "{searchTerm}". Select a team:</p>
+                  <p>Matching teams found for "{searchTerm}"</p>
                   <ul>
                     {filteredProjects.map((project) => (
                       <li key={project.id} onClick={() => navigate(`/teams/${project.id}`)}>
