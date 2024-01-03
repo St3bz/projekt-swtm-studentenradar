@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import Searchbar from './TeamSearchbar';
 import User from '../images/icon_user.png';
 import Calendar from '../images/calendar.png';
 import goBackBtn from '../images/backButton.png';
@@ -13,11 +12,7 @@ const Team = () => {
     const studentUrl = '/students';
     const [project, setProject] = useState([])
     const [students, setStudents] = useState([])
-    const [supervisors, setSupervisors] = useState([])
-    const [projects, setProjects] = useState([])
-    const [filteredProjects, setFilteredProjects] = useState([]);
-    const [searchTerm, setSearchTerm] = useState('');
-    const navigate = useNavigate();
+    const [supervisors, setSupervisors] = useState([])   
     
     const fetchProjectData = (id) => {
         fetch(baseUrl + projectUrl + '/' + id, {
@@ -64,61 +59,12 @@ const Team = () => {
         fetchSupervisorData(id) 
     }, [])
 
-    const handleSearch = (searchTerm) => {
-        setSearchTerm(searchTerm);
-      
-        if (searchTerm.trim() === '') {
-            setFilteredProjects([]);
-            return;
-        }
-
-        const filtered = projects.filter((project) =>
-          project.name.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-        setFilteredProjects(filtered);
-
-        if (filtered.length === 1) {
-            navigate(`/teams/${filtered[0].id}`);
-        }
-    };
-
-    const handleSearchSuggestions = (searchTerm) => {
-        
-        const suggestions = projects.filter((project) =>
-          project.name.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-        setFilteredProjects(suggestions);
-    };
-
-    const renderResults = () => {
-        if (filteredProjects.length === 0) {
-          return <p>No matching teams found for "{searchTerm}".</p>;
-        } else{ 
-            return (
-                <div>
-                  <p>Matching teams found for "{searchTerm}"</p>
-                  <ul>
-                    {filteredProjects.map((project) => (
-                      <li key={project.id} onClick={() => navigate(`/teams/${project.id}`)}>
-                        {project.name}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-            );
-        }
-      };
-
+    const navigate = useNavigate();
 	const goBack = () => {
 		navigate('/teams', {replace: true});
 	}
     return (
         <div className="Teams">
-          <div className="title">
-                <b>Teams</b>
-                <Searchbar handleSearch={handleSearch} handleSuggestions={handleSearchSuggestions} />
-          </div>
-            {renderResults()}
             {project && (
                 <div>
                     <div className='goBackButton'>
