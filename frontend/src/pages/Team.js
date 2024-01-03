@@ -1,38 +1,72 @@
 import React, {useState, useEffect} from 'react';
-import {useNavigate} from 'react-router-dom';
 import Searchbar from './TeamSearchbar';
-import TeamView from './TeamView';
-//import ShowTeam from './ShowTeam';
+import User from '../images/icon_user.png';
+import Calendar from '../images/calendar.png';
+import goBackBtn from '../images/backButton.png';
+import Add from '../images/add.png';
+import { useParams, useNavigate } from 'react-router-dom';
 /* import useFetch from './useFetch'; */
-const Teams = () => {
-    /* const {data:team, isPending, error} = useFetch('/api/v1/project') */
+const Team = () => {
+    const {id} = useParams();
+    const baseUrl = 'http://localhost:8081/api/v1';
+    const projectUrl = '/projects';
+    const studentUrl = '/students';
+    const [project, setProject] = useState([])
+    const [students, setStudents] = useState([])
+    const [supervisors, setSupervisors] = useState([])
     const [projects, setProjects] = useState([])
     const [filteredProjects, setFilteredProjects] = useState([]);
-    const navigate = useNavigate();
     const [searchTerm, setSearchTerm] = useState('');
-
-    const fetchProjectData = () => {
-        fetch('http://localhost:8081/api/v1/projects', {
+    const navigate = useNavigate();
+    
+    const fetchProjectData = (id) => {
+        fetch(baseUrl + projectUrl + '/' + id, {
             method: 'GET',
         })
         .then(response => {
             return response.json()
         })
         .then(data => {
-            setProjects(data);
-            console.log('zuweisung');
+            setProject(data);
+            console.log('test');
             console.log(data)
         })
-    }
+    } 
+    const fetchStudentData = (id) => {
+        fetch(baseUrl + projectUrl + '/' + id + '/members' , {
+            method: 'GET',
+        })
+        .then(response => {
+            return response.json()
+        })
+        .then(data => {
+            setStudents(data);
+            console.log('testStud');
+            console.log(data)
+        })
+    } 
+    const fetchSupervisorData = (id) => {
+        fetch(baseUrl + studentUrl + '/' + id + '/supervisor', {
+            method: 'GET',
+        })
+        .then(response => {
+            return response.json()
+        })
+        .then(data => {
+            setSupervisors(data)
+            console.log('testSuper');
+            console.log(data)
+        })
+    } 
     useEffect(() => {
-        fetchProjectData();
-        /* fetchStudentData() */
+        fetchProjectData(id);
+        fetchStudentData(id);
+        fetchSupervisorData(id) 
     }, [])
 
     const handleSearch = (searchTerm) => {
         setSearchTerm(searchTerm);
-
-        // Reset filteredProjects when the search term is empty
+      
         if (searchTerm.trim() === '') {
             setFilteredProjects([]);
             return;
@@ -49,7 +83,7 @@ const Teams = () => {
     };
 
     const handleSearchSuggestions = (searchTerm) => {
-        // Filter projects for search suggestions
+        
         const suggestions = projects.filter((project) =>
           project.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
@@ -75,20 +109,62 @@ const Teams = () => {
         }
       };
 
-    return (  
+	const goBack = () => {
+		navigate('/teams', {replace: true});
+	}
+    return (
         <div className="Teams">
-            <div className="title">
+          <div className="title">
                 <b>Teams</b>
                 <Searchbar handleSearch={handleSearch} handleSuggestions={handleSearchSuggestions} />
-            </div>
+          </div>
             {renderResults()}
-            {/* {error && <div>{error}</div>}
-            {isPending && <div>Loading...</div>} */}
-            {projects  && <TeamView team={projects} /> }
-            {/* {team && <ShowTeam team={team.filter((prj) => prj.id === 1)}/>} */}
-            {/* <ShortcutList shortcut={shortcut.filter((scut) => scut.author === 'it' )} /> */}
+            {project && (
+                <div>
+                    <div className='goBackButton'>
+                        <button onClick={goBack}>
+                            <img src={goBackBtn} className="goBack" alt="goBack" />
+                        </button>
+                    </div>
+                    <div className='projectField'>
+                        <div className='proj' key={project.id}>
+                            <div className='projName'>
+                                <b>{project.name}</b>
+                            </div>
+                        </div>
+                        <div className='projInfo'>
+                            <div><img src={User} className="iconsTeam" alt="user" /> {supervisors.firstName} {supervisors.lastName}</div>
+                            <div><img src={Calendar} className="iconsTeam" alt="calendar" /> Kein Zeitraum</div>
+                            <div><img src={Add} className="iconsTeam" alt="add" /></div>
+                        </div>
+                        <div className='boxes'>
+                            <div className='projMember'>
+                                <table>
+                                    <thead>
+                                       <tr>
+                                            <th>Vorname</th>
+                                            <th>Nachname</th>
+                                        </tr> 
+                                    </thead>
+                                    <tbody>
+                                        {students.map(student => (
+                                            <tr key={student.id}>
+                                                <td>{student.firstName}</td>
+                                                <td>{student.lastName}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div className='projDetails' key={project.id}>
+                                <b>{project.description}</b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
-}
- 
-export default Teams;
+};
+
+export default Team;

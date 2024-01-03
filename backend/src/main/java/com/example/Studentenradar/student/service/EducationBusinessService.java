@@ -47,11 +47,21 @@ public class EducationBusinessService {
         if (education.isPresent()) {
             Education foundEducation = education.get();
 
-            foundEducation.setUniversity(updatedEducation.getUniversity());
-            foundEducation.setCourseOfStudy(updatedEducation.getCourseOfStudy());
-            foundEducation.setDesiredDegree(updatedEducation.getDesiredDegree());
-            foundEducation.setSemester(updatedEducation.getSemester());
-            foundEducation.setAverageGrade(updatedEducation.getAverageGrade());
+            if (updatedEducation.getUniversity() != null) {
+                foundEducation.setUniversity(updatedEducation.getUniversity());
+            }
+            if (updatedEducation.getCourseOfStudy() != null) {
+                foundEducation.setCourseOfStudy(updatedEducation.getCourseOfStudy());
+            }
+            if (updatedEducation.getDesiredDegree() != null) {
+                foundEducation.setDesiredDegree(updatedEducation.getDesiredDegree());
+            }
+            if (updatedEducation.getSemester() != 0) {
+                foundEducation.setSemester(updatedEducation.getSemester());
+            }
+            if (updatedEducation.getAverageGrade() != 0.0) {
+                foundEducation.setAverageGrade(updatedEducation.getAverageGrade());
+            }
 
             return educationRepository.save(foundEducation);
         }

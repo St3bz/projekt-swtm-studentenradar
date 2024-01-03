@@ -19,6 +19,8 @@ public class WorkId implements Serializable{
         this.studentId = studentId;
     }
 
+    public WorkId(){}
+
     public int getWeek() {
         return week;
     }

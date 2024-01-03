@@ -33,23 +33,31 @@ public class WorkController {
         return service.getWork();
     }
 
-    @PostMapping
-    public Work addWork(@RequestBody Work work) {
-        return service.addWork(work);
-    }
+    @GetMapping("/{studentId}/{week}")
+    public Optional<Work> getWorkById(
+        @PathVariable(name = "studentId") int studentId,
+        @PathVariable(name = "week") int week) {
 
-    @GetMapping("/{id}")
-    public Optional<Work> getWorkById(@PathVariable(name = "id") WorkId id) {
+        WorkId id = new WorkId(week, studentId);
         return service.getById(id);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public boolean deleteWork(@PathVariable(name = "id") WorkId id) {
+    @PostMapping("/{studentId}")
+    public Work addWork(@RequestBody int hours, @PathVariable(name = "studentId") int studentId) {
+        return service.addHours(studentId, hours);
+    }
+
+    @DeleteMapping("/{studentId}/{week}")
+    public boolean deleteWork(
+        @PathVariable(name = "studentId") int studentId,
+        @PathVariable(name = "week") int week) {
+
+        WorkId id = new WorkId(week, studentId);
         return service.deleteWork(id);
     }
 
-    @PutMapping("/update/{id}")
-    public Work updateWork(@RequestBody Work work, @PathVariable(name = "id") WorkId id) {
-        return service.updateWork(id, work);
+    @PutMapping("/{studentId}")
+    public Work updateWork(@RequestBody int hours, @PathVariable(name = "studentId") int studentId) {
+        return service.updateWork(studentId, hours);
     }
 }
