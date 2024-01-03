@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.Studentenradar.supervisor.model.Supervisor;
 import com.example.Studentenradar.student.model.Student;
+import com.example.Studentenradar.supervisor.model.Supervisor;
 import com.example.Studentenradar.supervisor.service.SupervisorBusinessService;
 
 @RestController
