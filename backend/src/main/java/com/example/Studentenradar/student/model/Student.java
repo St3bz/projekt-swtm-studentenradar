@@ -76,7 +76,8 @@ public class Student {
         inverseJoinColumns = @JoinColumn(name = "hardware_id", referencedColumnName = "id"))
     private List<Hardware> ownedHardware;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "student-contract")
+    @OneToOne(mappedBy = "student")
     private StudentContract studentContract;
 
     @OneToMany(mappedBy = "student") 
@@ -188,6 +189,14 @@ public class Student {
 
     public void removeHardware(Hardware hardware){
         ownedHardware.remove(hardware);
+    }
+
+    public StudentContract getStudentContract() {
+        return studentContract;
+    }
+
+    public void setStudentContract(StudentContract studentContract) {
+        this.studentContract = studentContract;
     }
 
     @Override

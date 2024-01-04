@@ -1,7 +1,10 @@
 package com.example.Studentenradar.contract.model;
 
-import com.example.Studentenradar.student.model.Student;
+import com.example.studentenradar.student.model.Student;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -17,13 +20,14 @@ public class StudentContract {
     @EmbeddedId
     StudentContractId id;
 
-    @OneToOne
     @MapsId("studentId")
+    @OneToOne
+    @JsonBackReference(value="student-contract")
     @JoinColumn(name = "student_id")
     Student student;
     
-    @OneToOne
     @MapsId("contractId")
+    @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "contract_id")
     Contract contract;
 
@@ -31,13 +35,17 @@ public class StudentContract {
     private String contractStatus;
 
     @Column(name = "acceptance_status")
-    private Integer acceptanceStatus;
+    private Boolean acceptanceStatus;
 
     public StudentContract(){
     }
+
+    public StudentContract(StudentContractId id){
+        this.id = id;
+    }
     
     public StudentContract(StudentContractId id, Student student, Contract contract, String contractStatus,
-            int acceptanceStatus) {
+            Boolean acceptanceStatus) {
         this.id = id;
         this.student = student;
         this.contract = contract;
@@ -77,11 +85,11 @@ public class StudentContract {
         this.contractStatus = contractStatus;
     }
 
-    public int getAcceptanceStatus() {
+    public Boolean getAcceptanceStatus() {
         return acceptanceStatus;
     }
 
-    public void setAcceptanceStatus(int acceptanceStatus) {
+    public void setAcceptanceStatus(Boolean acceptanceStatus) {
         this.acceptanceStatus = acceptanceStatus;
     } 
 }

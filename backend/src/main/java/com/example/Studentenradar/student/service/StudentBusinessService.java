@@ -7,6 +7,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.studentenradar.contract.model.Contract;
+import com.example.studentenradar.contract.model.StudentContract;
+import com.example.studentenradar.contract.service.StudentContractBusinessService;
 import com.example.studentenradar.hardware.model.Hardware;
 import com.example.studentenradar.hardware.service.HardwareBusinessService;
 import com.example.studentenradar.project.model.Project;
@@ -27,12 +30,13 @@ public class StudentBusinessService {
     private ProjectBusinessService projectBusinessService;
     private SupervisorBusinessService supervisorBusinessService;
     private HardwareBusinessService hardwareBusinessService;
+    private StudentContractBusinessService studentContractBusinessService;
 
     @Autowired
     StudentBusinessService(StudentRepository studentRepository,
-                            AddressBusinessService addressBusinessService, EducationBusinessService educationBusinessService, 
-                            ProjectBusinessService projectBusinessService, SupervisorBusinessService supervisorBusinessService,
-                            HardwareBusinessService hardwareBusinessService) {
+            AddressBusinessService addressBusinessService, EducationBusinessService educationBusinessService,
+            ProjectBusinessService projectBusinessService, SupervisorBusinessService supervisorBusinessService,
+            HardwareBusinessService hardwareBusinessService, StudentContractBusinessService studentContractBusinessService) {
         super();
         this.studentRepository = studentRepository;
 
@@ -41,13 +45,14 @@ public class StudentBusinessService {
         this.projectBusinessService = projectBusinessService;
         this.supervisorBusinessService = supervisorBusinessService;
         this.hardwareBusinessService = hardwareBusinessService;
+        this.studentContractBusinessService = studentContractBusinessService;
     }
 
     public Optional<Student> getById(int id) {
         return studentRepository.findById(id);
     }
 
-    public List<Student> getStudents() { 
+    public List<Student> getStudents() {
         return studentRepository.findAll();
     }
 
@@ -93,20 +98,20 @@ public class StudentBusinessService {
     }
 
     // address
-    public Address getStudentAddress(int id){
+    public Address getStudentAddress(int id) {
         Optional<Student> student = studentRepository.findById(id);
 
-        if (student.isPresent()){
+        if (student.isPresent()) {
             return student.get().getAddress();
         }
         return null;
     }
 
-    public Boolean addStudentAddress(int id, Address address){
+    public Boolean addStudentAddress(int id, Address address) {
         Optional<Student> student = studentRepository.findById(id);
         Address createdAddress = addressBusinessService.addAddress(address);
 
-        if (student.isPresent() && student.get().getAddress() == null){
+        if (student.isPresent() && student.get().getAddress() == null) {
             student.get().setAddress(createdAddress);
             studentRepository.save(student.get());
             return true;
@@ -114,10 +119,10 @@ public class StudentBusinessService {
         return false;
     }
 
-    public Address changeStudentAddress(int id, Address address){
+    public Address changeStudentAddress(int id, Address address) {
         Optional<Student> student = studentRepository.findById(id);
 
-        if (!student.isPresent()){
+        if (!student.isPresent()) {
             return null;
         }
 
@@ -130,22 +135,21 @@ public class StudentBusinessService {
         return updatedAddress;
     }
 
-
     // education
-    public Education getStudentEducation(int id){
+    public Education getStudentEducation(int id) {
         Optional<Student> student = studentRepository.findById(id);
 
-        if (student.isPresent()){
+        if (student.isPresent()) {
             return student.get().getEducation();
         }
         return null;
     }
 
-    public Boolean addStudentEducation(int id, Education education){
+    public Boolean addStudentEducation(int id, Education education) {
         Optional<Student> student = studentRepository.findById(id);
         Education createdEducation = educationBusinessService.addEducation(education);
 
-        if (student.isPresent() && student.get().getEducation() == null){
+        if (student.isPresent() && student.get().getEducation() == null) {
             student.get().setEducation(createdEducation);
             studentRepository.save(student.get());
             return true;
@@ -153,10 +157,10 @@ public class StudentBusinessService {
         return false;
     }
 
-    public Education changeStudentEducation(int id, Education education){
+    public Education changeStudentEducation(int id, Education education) {
         Optional<Student> student = studentRepository.findById(id);
-        
-        if (!student.isPresent()){
+
+        if (!student.isPresent()) {
             return null;
         }
 
@@ -169,50 +173,50 @@ public class StudentBusinessService {
     }
 
     // supervisor
-    public Supervisor getSupervisorOfStudent(int id){
+    public Supervisor getSupervisorOfStudent(int id) {
         Optional<Student> student = studentRepository.findById(id);
 
-        if (student.isPresent()){
+        if (student.isPresent()) {
             return student.get().getSupervisor();
         }
         return null;
     }
 
-    public Supervisor asssignSupervisorToStudent(int id, int supervisorId){
+    public Supervisor asssignSupervisorToStudent(int id, int supervisorId) {
 
         Optional<Student> student = studentRepository.findById(id);
         Optional<Supervisor> supervisor = supervisorBusinessService.getById(supervisorId);
 
-         if (student.isPresent() && supervisor.isPresent()){
-            if (student.get().getSupervisor() == null){
+        if (student.isPresent() && supervisor.isPresent()) {
+            if (student.get().getSupervisor() == null) {
                 student.get().setSupervisor(supervisor.get());
                 supervisor.get().addStudent(student.get());
 
                 studentRepository.save(student.get());
             }
             return student.get().getSupervisor();
-        } 
+        }
         return null;
     }
 
-    public Supervisor changeSupervisorOfStudent(int id, int supervisorId){
+    public Supervisor changeSupervisorOfStudent(int id, int supervisorId) {
 
         Optional<Student> student = studentRepository.findById(id);
         Optional<Supervisor> supervisor = supervisorBusinessService.getById(supervisorId);
 
-         if (student.isPresent() && supervisor.isPresent()){
+        if (student.isPresent() && supervisor.isPresent()) {
             student.get().setSupervisor(supervisor.get());
 
             studentRepository.save(student.get());
             return student.get().getSupervisor();
-        } 
-        return null; 
+        }
+        return null;
     }
 
-    public boolean removeSupervisorOfStudent(int id){
-       Optional<Student> student = studentRepository.findById(id);
+    public boolean removeSupervisorOfStudent(int id) {
+        Optional<Student> student = studentRepository.findById(id);
 
-         if (student.isPresent()){
+        if (student.isPresent()) {
             student.get().setSupervisor(null);
 
             studentRepository.save(student.get());
@@ -222,50 +226,50 @@ public class StudentBusinessService {
     }
 
     // project
-    public Project getProjectOfStudent(int id){
+    public Project getProjectOfStudent(int id) {
         Optional<Student> student = studentRepository.findById(id);
 
-        if (student.isPresent()){
+        if (student.isPresent()) {
             return student.get().getProject();
         }
         return null;
     }
 
-    public Project asssignProjectToStudent(int id, int projectId){
+    public Project asssignProjectToStudent(int id, int projectId) {
 
         Optional<Student> student = studentRepository.findById(id);
         Optional<Project> project = projectBusinessService.getById(projectId);
 
-         if (student.isPresent() && project.isPresent()){
-            if (student.get().getProject() == null){
+        if (student.isPresent() && project.isPresent()) {
+            if (student.get().getProject() == null) {
                 student.get().setProject(project.get());
                 project.get().addStudent(student.get());
 
                 studentRepository.save(student.get());
             }
             return student.get().getProject();
-        } 
+        }
         return null;
     }
 
-    public Project changeProjectOfStudent(int id, int projectId){
+    public Project changeProjectOfStudent(int id, int projectId) {
 
         Optional<Student> student = studentRepository.findById(id);
         Optional<Project> project = projectBusinessService.getById(projectId);
 
-         if (student.isPresent() && project.isPresent()){
+        if (student.isPresent() && project.isPresent()) {
             student.get().setProject(project.get());
 
             studentRepository.save(student.get());
             return student.get().getProject();
-        } 
-        return null; 
+        }
+        return null;
     }
 
-    public Boolean removeProjectOfStudent(int id){
-       Optional<Student> student = studentRepository.findById(id);
+    public Boolean removeProjectOfStudent(int id) {
+        Optional<Student> student = studentRepository.findById(id);
 
-         if (student.isPresent()){
+        if (student.isPresent()) {
             student.get().setProject(null);
 
             studentRepository.save(student.get());
@@ -275,20 +279,20 @@ public class StudentBusinessService {
     }
 
     // hardware
-    public List<Hardware> getStudentHardwareById(int id){
+    public List<Hardware> getStudentHardwareById(int id) {
         Optional<Student> student = studentRepository.findById(id);
 
-        if (student.isPresent()){
+        if (student.isPresent()) {
             return student.get().getOwnedHardware();
         }
         return Collections.emptyList();
     }
 
-    public List<Hardware> addStudentHardware(int id, int hardwareId){
+    public List<Hardware> addStudentHardware(int id, int hardwareId) {
         Optional<Student> student = studentRepository.findById(id);
         Optional<Hardware> hardware = hardwareBusinessService.getById(hardwareId);
 
-        if (student.isPresent() && hardware.isPresent()){
+        if (student.isPresent() && hardware.isPresent()) {
             student.get().addHardware(hardware.get());
             hardware.get().addStudent(student.get());
 
@@ -298,11 +302,11 @@ public class StudentBusinessService {
         return Collections.emptyList();
     }
 
-    public Boolean removeStudentHardware(int id, int hardwareId){
+    public Boolean removeStudentHardware(int id, int hardwareId) {
         Optional<Student> student = studentRepository.findById(id);
         Optional<Hardware> hardware = hardwareBusinessService.getById(hardwareId);
 
-        if (student.isPresent() && hardware.isPresent() && student.get().getOwnedHardware().contains(hardware.get())){
+        if (student.isPresent() && hardware.isPresent() && student.get().getOwnedHardware().contains(hardware.get())) {
             student.get().removeHardware(hardware.get());
             hardware.get().removeStudent(student.get());
 
@@ -311,7 +315,79 @@ public class StudentBusinessService {
         }
         return false;
 
+    }
+
+    // contract
+    public StudentContract getStudentContractById(int id) {
+        Optional<Student> student = studentRepository.findById(id);
+
+        if (student.isPresent()) {
+            return student.get().getStudentContract();
+        }
+        return null;
 
     }
 
+    public StudentContract addStudentContract(int id, Contract contract) {
+        Optional<Student> student = studentRepository.findById(id);
+
+        if (student.isPresent()) {
+            StudentContract studentContract = studentContractBusinessService.addStudentContract(contract,
+                    student.get());
+            student.get().setStudentContract(studentContract);
+            studentRepository.save(student.get());
+            return studentContract;
+        }
+        return null;
+    }
+
+    public Contract updateContract(int id, Contract updatedContract) {
+        Optional<Student> student = studentRepository.findById(id);
+
+        if (student.isPresent()) {
+            StudentContract studentContract = student.get().getStudentContract();
+            return studentContractBusinessService.updateContract(studentContract, updatedContract);
+        }
+        return null;
+    }
+
+    public StudentContract updateContractStatus(int id, String status) {
+        Optional<Student> student = studentRepository.findById(id);
+
+        if (student.isPresent()) {
+            StudentContract studentContract = student.get().getStudentContract();
+            studentContract.setContractStatus(status);
+            studentRepository.save(student.get());
+            return studentContract;
+        }
+        return null;
+    }
+
+    public StudentContract updateContractAcceptanceStatus(int id, Boolean status) {
+        Optional<Student> student = studentRepository.findById(id);
+
+        if (student.isPresent()) {
+            StudentContract studentContract = student.get().getStudentContract();
+            studentContract.setAcceptanceStatus(status);
+            studentRepository.save(student.get());
+            return studentContract;
+        }
+        return null;
+    }
+
+    public Boolean removeStudentContract(int id) {
+        Optional<Student> student = studentRepository.findById(id);
+
+        if (student.isPresent()) {
+            StudentContract studentContract = student.get().getStudentContract();
+            if (studentContract != null) {
+                studentContractBusinessService.deleteStudentContract(studentContract.getId());
+                student.get().setStudentContract(null);
+            }
+
+            studentRepository.save(student.get());
+            return true;
+        }
+        return false;
+    }
 }

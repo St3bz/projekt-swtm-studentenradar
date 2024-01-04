@@ -3,7 +3,6 @@ package com.example.Studentenradar.contract.model;
 import com.example.studentenradar.student.model.Student;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
