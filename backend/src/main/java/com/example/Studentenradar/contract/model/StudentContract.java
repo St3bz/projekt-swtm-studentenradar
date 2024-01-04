@@ -1,7 +1,8 @@
-package com.example.studentenradar.contract.model;
+package com.example.Studentenradar.contract.model;
 
 import com.example.studentenradar.student.model.Student;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

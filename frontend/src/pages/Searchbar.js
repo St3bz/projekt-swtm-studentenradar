@@ -1,5 +1,7 @@
 import search from '../images/search_icon.png';
+
 const Searchbar = () => {
+
     return (  
         <div className="searchbar">
             <form>

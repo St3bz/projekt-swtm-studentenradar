@@ -1,4 +1,4 @@
-package com.example.studentenradar.contract.service;
+package com.example.Studentenradar.contract.service;
 
 import java.time.LocalDate;
 import java.time.temporal.WeekFields;

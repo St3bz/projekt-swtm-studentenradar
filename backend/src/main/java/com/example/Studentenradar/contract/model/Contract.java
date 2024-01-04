@@ -1,4 +1,4 @@
-package com.example.studentenradar.contract.model;
+package com.example.Studentenradar.contract.model;
 
 import java.util.Date;
 

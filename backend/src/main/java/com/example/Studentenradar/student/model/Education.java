@@ -1,4 +1,4 @@
-package com.example.studentenradar.student.model;
+package com.example.Studentenradar.student.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
