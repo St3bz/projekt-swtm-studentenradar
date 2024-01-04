@@ -1,4 +1,5 @@
 import 'dayjs/locale/de';
+import React, { useState } from 'react';
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -12,6 +13,36 @@ const AddHardware = () => {
 	    const goBack = () => {
 		navigate('/HardwareEdit', {replace: true});
 	}
+  const [newHardware, setNewHardware] = useState({
+    article: '',
+    specification: '',
+  });
+
+  const handleInputChange = (field, value) => {
+    setNewHardware((prevStudent) => ({
+      ...prevStudent,
+      [field]: value,
+    }));
+  };
+
+  const handleAddHardware = () => {
+    fetch('http://localhost:8081/api/v1/hardware', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newHardware),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        navigate('/Hardware', { replace: true });
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  };
     return ( 
       <div>
         <div className="title">
@@ -30,25 +61,30 @@ const AddHardware = () => {
           <div className="first-row">
             <div className="first-row-a">
               <p>Gerät</p>
-              <input type="text" id="field-first-a" className="q" />
+              <input
+                type="text"
+                id="field-first-a"
+                className="q"
+                value={newHardware.article}
+                onChange={(e) => handleInputChange('article', e.target.value)}
+              />
             </div>
             <div className="first-row-b">
-              <p>Grafikkarte</p>
-              <input type="text" id="field-first-b" className="q" />
-            </div>
-          </div>
-
-          <div className="second-row">
-            <div className="second-row-a">
-            <p>Hardware</p>
-            <input type="text" id="field-second-a" className="q" />
+              <p>Spezifikation</p>
+              <input
+                type="text"
+                id="field-first-b"
+                className="q"
+                value={newHardware.specification}
+                onChange={(e) => handleInputChange('specification', e.target.value)}
+              />
             </div>
           </div>
 
         
           <div className="add-button">
             <div className='adding'>
-              <b>Hinzufügen</b>
+              <b onClick={handleAddHardware}>Hinzufügen</b>
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import sort from '../images/sort.png';
 import plus from '../images/plus.png';
+import available from '../images/available.png';
 import deletion from '../images/delete.png';
 import checkbox from '../images/checkbox.png';
 import Searchbar from './Searchbar';
@@ -11,6 +12,7 @@ import { Link } from 'react-router-dom';
 const HardwareEdit = () => {
   const [selectedIds, setSelectedIds] = useState([]);
   const [hardware, setHardware] = useState([])
+  
 
   const navigate = useNavigate();
 	    const goBack = () => {
@@ -45,6 +47,34 @@ const HardwareEdit = () => {
     });
   };
 
+ const handleAvailableSelected = () => {
+  const defaultAvailability = 'nicht verfügbar';
+
+  selectedIds.forEach((id) => {
+    // Update the availability to the default value for each selected item
+    fetch(`http://localhost:8081/api/v1/hardware/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ availability: defaultAvailability }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        // Handle successful response, if needed
+        console.log(`Record with ID ${id} updated to default availability`);
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  });
+};
+
+
+
   const handleDeleteSelected = () => {
     selectedIds.forEach((selectedIds) => {
     fetch(`http://localhost:8081/api/v1/hardware/${selectedIds}`, {
@@ -74,7 +104,14 @@ const HardwareEdit = () => {
           <Searchbar />
            <div className="auswahl">
         <img src={sort} className="sort" alt="logo" />
-        <a href="add"><img src={plus} className="plus" alt="logo" /></a>
+        <img
+        src={available}
+        className="available"
+        alt="logo"
+        onClick={handleAvailableSelected}
+        style={{ cursor: 'pointer' }}
+      />
+        <a href="AddHardware"><img src={plus} className="plus" alt="logo" /></a>
         <img
         src={deletion}
         className="deletion"
@@ -88,6 +125,7 @@ const HardwareEdit = () => {
                 <tr>
                   <th>Gerät</th>
                   <th>Spezifikation</th>
+                  <th>Verfügbarkeit</th>
                   <th>
                     <input
                       type="checkbox"
@@ -110,6 +148,7 @@ const HardwareEdit = () => {
                   <tr key={hardware.id}>
                     <td>{hardware.article}</td>
                     <td>{hardware.specifications}</td>
+                    <td>{hardware.availability}</td>
                     <td>
                       <input
                         type="checkbox"

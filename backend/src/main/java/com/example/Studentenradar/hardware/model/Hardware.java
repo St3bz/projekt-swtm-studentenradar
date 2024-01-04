@@ -27,6 +27,9 @@ public class Hardware {
     @Column
     private String specifications;
 
+    @Column
+    private String availability;
+
     @ManyToMany(mappedBy = "ownedHardware")
     private List<Student> students;
 
@@ -37,6 +40,7 @@ public class Hardware {
         this.id = id;
         this.article = article;
         this.specifications = specifications;
+        this.availability = availability;
     }
 
     public int getId() {
@@ -51,6 +55,10 @@ public class Hardware {
         return article;
     }
 
+    public String getAvailability() {
+        return availability;
+    }
+
     public void setArticle(String article) {
         this.article = article;
     }
@@ -63,8 +71,13 @@ public class Hardware {
         this.specifications = specifications;
     }
 
+    public void setAvailability(String availability) {
+        this.availability = availability;
+    }
+
     @Override
     public String toString() {
-        return "Hardware [id=" + id + ", article=" + article + ", specifications=" + specifications + "]";
+        return "Hardware [id=" + id + ", article=" + article + ", specifications=" + specifications + ", availiability="
+                + availability + "]";
     }
 }

@@ -183,7 +183,12 @@ form{
 .plus{
   height: 2.307vmin;
   width: 2.307vmin;
-  margin-left: 50%;
+  margin-left: 45%;
+}
+.available {
+  height: 2.307vmin;
+  width: 2.307vmin;
+  margin-left: 3%;
 }
 
 .deletion{

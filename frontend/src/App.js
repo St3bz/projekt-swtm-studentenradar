@@ -15,6 +15,7 @@ import Team from './pages/Team.js';
 import ShowTeam from './pages/ShowTeam.js';
 import AddTime from './pages/TimeMgmt.js';
 import Time from './pages/ShowTimeMgmt.js';
+import AddHardware from './pages/AddHardware.js';
 
 const keycloak = new Keycloak({
   url: "http://localhost:8080",
@@ -82,6 +83,7 @@ function App() {
           <Route path="/HardwareEdit" element={<HardwareEdit />} />
           <Route path="/Hardware" element={<Hardware />} />
           <Route path="/add" element={<AddStudent />} />
+          <Route path="/AddHardware" element={<AddHardware />} />
           <Route path="/teams" element={<Team />} />
           <Route path="/teams/:id" element={<ShowTeam />} />
           <Route path="/profile" element={<Profile />} />
