@@ -2,7 +2,6 @@ package com.example.studentenradar.contract.service;
 
 import java.time.LocalDate;
 import java.time.temporal.WeekFields;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.example.studentenradar.contract.model.Work;
 import com.example.studentenradar.contract.model.WorkId;
 import com.example.studentenradar.contract.repository.WorkRepository;
-import com.example.studentenradar.student.model.Student;
 import com.example.studentenradar.student.service.StudentBusinessService;
 
 @Service
@@ -57,7 +55,6 @@ public class WorkBusinessService {
 
         if (work.isPresent()) {
             workRepository.delete(work.get());
-        //    Student student = studentBusinessService.getById(id.getStudentId());
             
             return true;
         }
@@ -69,11 +66,11 @@ public class WorkBusinessService {
         int week = currentDate.get(WeekFields.ISO.weekOfWeekBasedYear());
 
         WorkId workId = new WorkId(week, studentId);
+        Optional<Work> work = workRepository.findById(workId);
 
-        if (workRepository.findById(workId).isPresent()){
-            Work work = workRepository.findById(workId).get();
-            work.setWorkingHours(hours);
-            return workRepository.save(work);
+        if (work.isPresent()){
+            work.get().setWorkingHours(hours);
+            return workRepository.save(work.get());
         }
         return null;
     }
