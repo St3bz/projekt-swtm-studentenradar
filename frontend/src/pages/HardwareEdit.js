@@ -57,7 +57,8 @@ const HardwareEdit = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ availability: defaultAvailability }),
+      body: JSON.stringify({ 
+        availability: defaultAvailability, }),
     })
       .then((response) => {
         if (!response.ok) {
