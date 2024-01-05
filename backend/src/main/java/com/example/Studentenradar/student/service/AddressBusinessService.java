@@ -47,13 +47,25 @@ public class AddressBusinessService {
         if (address.isPresent()) {
             Address foundAddress = address.get();
 
-            foundAddress.setStreet(updatedAddress.getStreet());
-            foundAddress.setHouseNumber(updatedAddress.getHouseNumber());
-            foundAddress.setZipCode(updatedAddress.getZipCode());
-            foundAddress.setCity(updatedAddress.getCity());
+            if (updatedAddress.getStreet() != null) {
+                foundAddress.setStreet(updatedAddress.getStreet());
+            }
+
+            if (updatedAddress.getHouseNumber() != 0) {
+                foundAddress.setHouseNumber(updatedAddress.getHouseNumber());
+            }
+
+            if (updatedAddress.getZipCode() != 0) {
+                foundAddress.setZipCode(updatedAddress.getZipCode());
+            }
+
+            if (updatedAddress.getCity() != null) {
+                foundAddress.setCity(updatedAddress.getCity());
+            }
 
             return addressRepository.save(foundAddress);
         }
+
         return null;
     }
 }

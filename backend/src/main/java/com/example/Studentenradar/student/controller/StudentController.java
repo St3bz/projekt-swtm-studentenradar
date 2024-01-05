@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.studentenradar.contract.model.Contract;
+import com.example.studentenradar.contract.model.StudentContract;
 import com.example.studentenradar.hardware.model.Hardware;
+import com.example.studentenradar.project.model.Project;
 import com.example.studentenradar.student.model.Address;
 import com.example.studentenradar.student.model.Education;
 import com.example.studentenradar.student.model.Student;
@@ -57,10 +60,36 @@ public class StudentController {
         return service.updateStudent(id, student);
     }
 
-    // hardware 
-    @GetMapping("/{id}/hardware")
-    public List<Hardware> getStudentHardwareById(@PathVariable(name = "id") int id) {
-        return service.getStudentHardwareById(id);
+    // address 
+    @GetMapping("/{id}/address")
+    public Address getStudentAddress(@PathVariable(name = "id") int id){
+        return service.getStudentAddress(id);
+    }
+
+    @PostMapping("/{id}/address")
+    public Boolean addStudentAddress(@RequestBody Address address, @PathVariable(name = "id") int id){
+        return service.addStudentAddress(id, address);
+    }
+
+    @PutMapping("/{id}/address")
+    public Address changeStudentAddress(@RequestBody Address address, @PathVariable(name = "id") int id){
+        return service.changeStudentAddress(id, address);
+    }
+
+    //education
+    @GetMapping("/{id}/education")
+    public Education getStudentEducation(@PathVariable(name = "id") int id){
+        return service.getStudentEducation(id);
+    }
+
+    @PostMapping("/{id}/education")
+    public Boolean addStudentEducation(@RequestBody Education education, @PathVariable(name = "id") int id){
+        return service.addStudentEducation(id, education);
+    }
+
+    @PutMapping("/{id}/education")
+    public Education changeStudentEducation(@RequestBody Education education, @PathVariable(name = "id") int id){
+        return service.changeStudentEducation(id, education);
     }
 
     // supervisor
@@ -84,36 +113,73 @@ public class StudentController {
         return service.removeSupervisorOfStudent(id);
     }
 
-    // address 
-    @GetMapping("/{id}/address")
-    public Address getStudentAddress(@PathVariable(name = "id") int id){
-        return service.getStudentAddress(id);
+    // project
+    @GetMapping("/{id}/project")
+    public Project getProjectOfStudent(@PathVariable(name = "id") int id) {
+        return service.getProjectOfStudent(id);
     }
 
-    @PostMapping("/{id}/address")
-    public Address addStudentAddress(@RequestBody Address address, @PathVariable(name = "id") int id){
-        return service.addStudentAddress(id, address);
+    @PostMapping("/{id}/project")
+    public Project asssignProjectToStudent(@RequestBody int projectId, @PathVariable(name = "id") int id) {
+        return service.asssignProjectToStudent(id, projectId);
     }
 
-    @PutMapping("/{id}/address")
-    public Address changeStudentAddress(@RequestBody Address address, @PathVariable(name = "id") int id){
-        return service.changeStudentAddress(id, address);
+    @PutMapping("/{id}/project")
+    public Project changeProjectOfStudent(@RequestBody int projectId, @PathVariable(name = "id") int id) {
+        return service.changeProjectOfStudent(id, projectId);
     }
 
-    //education
-    /*@GetMapping("/{id}/education")
-    public Education getStudentEducation(@PathVariable(name = "id") int id){
-        return service.getStudentEducation(id);
+    @DeleteMapping("/{id}/project")
+    public boolean removeProjectOfStudent(@PathVariable(name = "id") int id) {
+        return service.removeProjectOfStudent(id);
     }
 
-    @PostMapping("/{id}/education")
-    public Education addStudentEducation(@RequestBody Education education, @PathVariable(name = "id") int id){
-        return service.addStudentEducation(id);
+    // hardware 
+    @GetMapping("/{id}/hardware")
+    public List<Hardware> getStudentHardwareById(@PathVariable(name = "id") int id) {
+        return service.getStudentHardwareById(id);
     }
 
-    @PutMapping("/{id}/education")
-    public Education changeStudentEducation(@RequestBody Education education, @PathVariable(name = "id") int id){
-        return service.changeStudentEducation(id);
+    @PostMapping("/{id}/hardware")
+    public List<Hardware> addStudentHardware(@RequestBody int hardwareId, @PathVariable(name = "id") int id) {
+        return service.addStudentHardware(id, hardwareId);
     }
-    */
+
+    @DeleteMapping("/{id}/hardware")
+    public Boolean removeStudentHardware(@RequestBody int hardwareId, @PathVariable(name = "id") int id) {
+        return service.removeStudentHardware(id, hardwareId);
+    }
+
+    // contract 
+    @GetMapping("/{id}/contract")
+    public StudentContract getStudentContractById(@PathVariable(name = "id") int id) {
+        return service.getStudentContractById(id);
+    }
+
+    
+    @PostMapping("/{id}/contract")
+    public StudentContract addStudentContract(@RequestBody Contract contract, @PathVariable(name = "id") int id) {
+        return service.addStudentContract(id, contract);
+    }
+
+    
+    @PutMapping("/{id}/contract")
+    public Contract updateContract(@RequestBody Contract contract, @PathVariable(name = "id") int id) {
+        return service.updateContract(id, contract);
+    }
+
+    @PutMapping("/{id}/contract-status")
+    public StudentContract updateContractStatus(@RequestBody String status, @PathVariable(name = "id") int id) {
+        return service.updateContractStatus(id, status);
+    }
+
+    @PutMapping("/{id}/contract-acceptance")
+    public StudentContract updateContractAcceptanceStatus(@RequestBody Boolean status, @PathVariable(name = "id") int id) {
+        return service.updateContractAcceptanceStatus(id, status);
+    }
+
+    @DeleteMapping("/{id}/contract")
+    public Boolean removeStudentContract(@PathVariable(name = "id") int id) {
+        return service.removeStudentContract(id);
+    }
 }

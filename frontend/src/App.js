@@ -11,11 +11,11 @@ import StudentsEdit from './pages/StudentsEdit';
 import Students from './pages/Students.js';
 import Home from './pages/Home';
 import Log from './images/logout.png';
+import Teams from './pages/Teams.js';
 import Team from './pages/Team.js';
-import ShowTeam from './pages/ShowTeam.js';
 import AddTime from './pages/TimeMgmt.js';
-import Time from './pages/ShowTimeMgmt.js';
 import AddHardware from './pages/AddHardware.js';
+import Time from './pages/TimeMgmtView.js';
 
 const keycloak = new Keycloak({
   url: "http://localhost:8080",
@@ -71,7 +71,13 @@ function App() {
 
   return (
     <div className="App">
-      <Sidebar pageWrapId={"page-wrap"} outerContainerId={"outer-container"}/>
+      <Sidebar pageWrapId={"page-wrap"} outerContainerId={"outer-container"}>
+        <div className='LogOut'>
+          <button onClick={handleLogout}>
+            <img src={Log} className='logoutIcon' alt='logout'/>
+          </button>
+        </div> 
+      </Sidebar>
       <Navbar />
       <div className="content">
         <Routes>
@@ -84,11 +90,11 @@ function App() {
           <Route path="/Hardware" element={<Hardware />} />
           <Route path="/add" element={<AddStudent />} />
           <Route path="/AddHardware" element={<AddHardware />} />
-          <Route path="/teams" element={<Team />} />
-          <Route path="/teams/:id" element={<ShowTeam />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/time/addtime" element={<AddTime />} />
-          <Route path="/time" element={<Time />} />
+          <Route path="/teams" element={<Teams />} />
+          <Route path="/teams/:id" element={<Team />} />
+          <Route path="/profile/:id" element={<Profile />} />
+          <Route path="time/:id/addtime" element={<AddTime />} />
+          <Route path="time/:id" element={<Time />} />
         </Routes>
       </div>
     </div>

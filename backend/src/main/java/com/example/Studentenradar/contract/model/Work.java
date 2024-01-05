@@ -1,36 +1,37 @@
 package com.example.studentenradar.contract.model;
 
 import com.example.studentenradar.student.model.Student;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "work")
+@JsonIgnoreProperties("student")
 public class Work {
 
     @EmbeddedId
     WorkId id;
 
-    @OneToOne
-    @MapsId("studentId")
-    @JoinColumn(name = "student_id", referencedColumnName = "id")
-    Student student;
-
     @Column(name = "working_hours")
     private int workingHours;
+
+    @MapsId("studentId")
+    @ManyToOne
+    @JoinColumn(name = "student_id", referencedColumnName = "id")
+    private Student student;
 
     public Work() {
     }
 
-    public Work(WorkId id, Student student, int workingHours) {
+    public Work(WorkId id, int workingHours) {
         this.id = id;
-        this.student = student;
         this.workingHours = workingHours;
     }
 
