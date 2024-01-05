@@ -706,13 +706,13 @@ form{
   padding: 2.459648vmin; /* 32px */
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 .editBox{
   padding: 2.459648vmin; /* 32px */
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 .edit{
   height: 2.307vmin;

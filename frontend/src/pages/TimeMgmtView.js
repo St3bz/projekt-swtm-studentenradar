@@ -3,10 +3,9 @@ import profileIcon from '../images/profile_icon.png';
 import selection from '../images/selection.png';
 import goBackBtn from '../images/backButton.png';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import useFetch from './useFetch';
+
 const TimeMgmtView = () => {
-    const {id} = useParams();
-    const {week} = useParams();
+    const {id, week} = useParams();
     const navigate = useNavigate();
     const baseUrl = 'http://localhost:8081/api/v1';
     const workUrl = '/work';  
@@ -15,16 +14,19 @@ const TimeMgmtView = () => {
     const [work, setWork] = useState([]);
     const [student, setStudent] = useState([]);
     const [contract, setContract] = useState([]);
-    const goBack = (id) => {
-		navigate('/profile/' + id, {replace: true});
-	}
+
     
-    const fetchWorkData = (id, week) => {
-        fetch(baseUrl + workUrl + '/' + id + week, {
+    const fetchWorkData = () => {
+        console.log('id:', id);
+        console.log('week:', week);
+        fetch(baseUrl + workUrl, {
             method: 'GET',
         })
         .then(response => {
-            return response.json()
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
         })
         .then(data => {
             setWork(data);
@@ -58,12 +60,16 @@ const TimeMgmtView = () => {
             console.log(data)
         })
     }
+    
     useEffect(() => {
-        fetchWorkData(id, week);
+        fetchWorkData();
         fetchStudentData(id);
         fetchContractData(id);
-        goBack(id)
     }, [])
+
+    const goBack = () => {
+		navigate(-1);
+	}
     return (  
         <div className="TimeTable">
             {work && (
@@ -84,18 +90,18 @@ const TimeMgmtView = () => {
                         </div>
                     </div>
                     <div className='timeEditBox'>
-                        <div className='contentBox' key={work.id}>
-                            <div className='editBox'>
-                                <Link to={`addtime/`}>
-                                    <img src={selection} className="edit" alt="edit" />
-                                </Link>
+                            <div className='contentBox'>
+                                <div className='workView'>
+                                    {work.map((hours) => ( 
+                                        <li key={hours.studentId}>Woche: {hours.week}</li>
+                                    ))}
+                                </div>
+                                <div className='editBox'>
+                                    <Link to={`addtime`}>
+                                        <img src={selection} className="edit" alt="edit" />
+                                    </Link>
+                                </div>
                             </div>
-                            <div>
-                                {work.map(hours => (
-                                    <li key={hours.id}>{hours}</li>
-                                ))}
-                            </div>
-                        </div>
                     </div>
                 </div>
             )}
