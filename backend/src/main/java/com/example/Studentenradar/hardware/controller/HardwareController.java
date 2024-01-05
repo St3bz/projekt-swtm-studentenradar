@@ -42,12 +42,12 @@ public class HardwareController {
         return service.getById(id);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public boolean deleteHardware(@PathVariable(name = "id") int id) {
         return service.deleteHardware(id);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public Hardware updateHardware(@RequestBody Hardware hardware, @PathVariable(name = "id") int id) {
         return service.updateHardware(id, hardware);
     }

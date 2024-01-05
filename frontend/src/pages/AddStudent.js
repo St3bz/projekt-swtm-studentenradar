@@ -1,35 +1,77 @@
+import React, { useState } from 'react';
 import profileIcon from '../images/profile_icon.png';
 import goBackBtn from '../images/backButton.png';
 import 'dayjs/locale/de';
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const AddStudent = () => {
   const navigate = useNavigate();
-	    const goBack = () => {
-		navigate('/StudentsEdit', {replace: true});
-	}
-    return ( 
-      <div>
-        <div className="title">
+  const [newStudent, setNewStudent] = useState({
+    lastName: '',
+    firstName: '',
+    startDatum: null,
+    endDatum: null,
+  });
+
+  const goBack = () => {
+    navigate('/StudentsEdit', { replace: true });
+  };
+
+  const handleInputChange = (field, value) => {
+    setNewStudent((prevStudent) => ({
+      ...prevStudent,
+      [field]: value,
+    }));
+  };
+
+  
+  const handleAddStudent = () => {
+    fetch('http://localhost:8081/api/v1/students', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newStudent),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        navigate('/Students', { replace: true });
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  };
+
+  return (
+    <div>
+      <div className="title">
         <div className='goBackButton'>
-                        <button onClick={goBack}>
-                            <img src={goBackBtn} className="goBack" alt="goBack" />
-                        </button>
-                    </div>
-            <b>Student hinzufügen</b>
-            </div>
-        <div className="table-box-add">
-        <img src={profileIcon} className='profile-icon' alt='profile'/>
-        
+          <button onClick={goBack}>
+            <img src={goBackBtn} className="goBack" alt="goBack" />
+          </button>
+        </div>
+        <b>Student hinzufügen</b>
+      </div>
+      <div className="table-box-add">
+        <img src={profileIcon} className='profile-icon' alt='profile' />
+
         <div className='table-add-data'>
 
           <div className="first-row">
             <div className="first-row-a">
               <p>Name</p>
-              <input type="text" id="field-first-a" className="q" />
+              <input
+                type="text"
+                id="field-first-a"
+                className="q"
+                value={newStudent.name}
+                onChange={(e) => handleInputChange('lastName', e.target.value)}
+              />
             </div>
             <div className="first-row-b">
               <p>Universität/Hochschule</p>
@@ -40,7 +82,13 @@ const AddStudent = () => {
           <div className="second-row">
             <div className="second-row-a">
             <p>Vorname</p>
-            <input type="text" id="field-second-a" className="q" />
+            <input
+                type="text"
+                id="field-first-c"
+                className="q"
+                value={newStudent.name}
+                onChange={(e) => handleInputChange('firstName', e.target.value)}
+              />
             </div>
             <div className="second-row-b">
               <p>Studiengang</p>
@@ -65,7 +113,13 @@ const AddStudent = () => {
             </div>
             <div className="third-row-b">
               <p>Semester</p>
-              <input type="text" id="field-third-c" className="q" />
+              <input
+                type="text"
+                id="field-third-c"
+                className="q"
+                value={newStudent.name}
+                onChange={(e) => handleInputChange('semester', e.target.value)}
+              />
             </div>
           </div>
 
@@ -109,13 +163,13 @@ const AddStudent = () => {
           </div>
           <div className="add-button">
             <div className='adding'>
-              <b>Hinzufügen</b>
+              <b onClick={handleAddStudent}>Hinzufügen</b>
             </div>
           </div>
         </div>
       </div>
-      </div>
-     );
+    </div>
+  );
 }
- 
+
 export default AddStudent;
