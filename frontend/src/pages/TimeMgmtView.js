@@ -4,7 +4,7 @@ import selection from '../images/selection.png';
 import goBackBtn from '../images/backButton.png';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import useFetch from './useFetch';
-const ShowTimeMgmt = () => {
+const TimeMgmtView = () => {
     const {id} = useParams();
     const {week} = useParams();
     const navigate = useNavigate();
@@ -103,4 +103,4 @@ const ShowTimeMgmt = () => {
     );
 }
  
-export default ShowTimeMgmt;
+export default TimeMgmtView;

@@ -1,4 +1,4 @@
-package com.example.Studentenradar.contract.controller;
+package com.example.studentenradar.contract.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.Studentenradar.contract.model.Work;
-import com.example.Studentenradar.contract.model.WorkId;
-import com.example.Studentenradar.contract.service.WorkBusinessService;
+import com.example.studentenradar.contract.model.Work;
+import com.example.studentenradar.contract.model.WorkId;
+import com.example.studentenradar.contract.service.WorkBusinessService;
 
 @RestController
 @RequestMapping("/api/v1/work")

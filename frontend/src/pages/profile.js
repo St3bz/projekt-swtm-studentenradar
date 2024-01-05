@@ -78,7 +78,7 @@ const Profile = () => {
                 <b>{student.firstName} {student.lastName}</b>
                     <p>{contract.employmentType}</p>
                 </div>
-                <Link to={`time/${student.id}`}>
+                <Link to={`time/${id}`}>
                     <img src={time} className='time' alt='time'/>
                 </Link>
             </div>

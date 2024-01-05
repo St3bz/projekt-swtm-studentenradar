@@ -1,4 +1,4 @@
-package com.example.Studentenradar.hardware.model;
+package com.example.studentenradar.hardware.model;
 
 import java.util.List;
 

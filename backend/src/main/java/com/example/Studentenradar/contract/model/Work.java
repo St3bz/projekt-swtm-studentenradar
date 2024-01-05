@@ -1,4 +1,4 @@
-package com.example.Studentenradar.contract.model;
+package com.example.studentenradar.contract.model;
 
 import com.example.studentenradar.student.model.Student;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

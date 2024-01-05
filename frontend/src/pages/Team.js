@@ -103,7 +103,7 @@ const Team = () => {
                                 </table>
                             </div>
                             <div className='projDetails' key={project.id}>
-                                <b>{project.description}</b>
+                                <p>{project.description}</p>
                             </div>
                         </div>
                     </div>

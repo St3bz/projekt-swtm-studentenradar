@@ -1,7 +1,6 @@
-import search from '../images/search_icon.png';
 import React, { useState } from 'react';
 
-const Searchbar = ({ handleSearch, handleSuggestions }) => {
+const TeamSearchbar = ({ handleSearch, handleSuggestions }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleChange = (e) => {
@@ -21,15 +20,14 @@ const Searchbar = ({ handleSearch, handleSuggestions }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <img src={search} className="searchIcon" alt="search" />
+    <form className="searchBar" onSubmit={handleSubmit}>
       <input
-        type="text" placeholder="Search teams..." value={searchTerm} onChange={handleChange}
+        type="text" className='searchInput' placeholder="Search teams..." value={searchTerm} onChange={handleChange}
       />
       <button type="submit">Search</button>    
     </form>
   );
 };
 
-export default Searchbar;
+export default TeamSearchbar;
 

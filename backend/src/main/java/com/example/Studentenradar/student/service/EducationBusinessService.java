@@ -1,4 +1,4 @@
-package com.example.Studentenradar.student.service;
+package com.example.studentenradar.student.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.Studentenradar.student.model.Education;
-import com.example.Studentenradar.student.repository.EducationRepository;
+import com.example.studentenradar.student.model.Education;
+import com.example.studentenradar.student.repository.EducationRepository;
 
 @Service
 public class EducationBusinessService {
