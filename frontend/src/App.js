@@ -14,6 +14,7 @@ import Log from './images/logout.png';
 import Teams from './pages/Teams.js';
 import Team from './pages/Team.js';
 import AddTime from './pages/TimeMgmt.js';
+import AddHardware from './pages/AddHardware.js';
 import Time from './pages/TimeMgmtView.js';
 
 const keycloak = new Keycloak({
@@ -88,6 +89,7 @@ function App() {
           <Route path="/HardwareEdit" element={<HardwareEdit />} />
           <Route path="/Hardware" element={<Hardware />} />
           <Route path="/add" element={<AddStudent />} />
+          <Route path="/AddHardware" element={<AddHardware />} />
           <Route path="/teams" element={<Teams />} />
           <Route path="/teams/:id" element={<Team />} />
           <Route path="/profile/:id" element={<Profile />} />
