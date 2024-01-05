@@ -51,7 +51,7 @@ const HardwareEdit = () => {
   const defaultAvailability = 'nicht verfügbar';
 
   selectedIds.forEach((id) => {
-    // Update the availability to the default value for each selected item
+    // Update the availability to the default value for each selected item -- not changing anything so far
     fetch(`http://localhost:8081/api/v1/hardware/${id}`, {
       method: 'PUT',
       headers: {
@@ -132,7 +132,6 @@ const HardwareEdit = () => {
                       id='checkAll'
                       className='checkBox'
                       onChange={() => {
-                        // Hier wird der Zustand aller Checkboxen aktualisiert
                         if (selectedIds.length === hardware.length) {
                           setSelectedIds([]);
                         } else {

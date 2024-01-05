@@ -1,8 +1,5 @@
-import 'dayjs/locale/de';
 import React, { useState } from 'react';
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useParams, useNavigate } from 'react-router-dom';
 import goBackBtn from '../images/backButton.png';
 import { Link } from 'react-router-dom';
@@ -15,12 +12,13 @@ const AddHardware = () => {
 	}
   const [newHardware, setNewHardware] = useState({
     article: '',
-    specification: '',
+    specifications: '',
+    availability: 'verfügbar',
   });
 
   const handleInputChange = (field, value) => {
-    setNewHardware((prevStudent) => ({
-      ...prevStudent,
+    setNewHardware((prevHardware) => ({
+      ...prevHardware,
       [field]: value,
     }));
   };
@@ -40,8 +38,22 @@ const AddHardware = () => {
         navigate('/Hardware', { replace: true });
       })
       .catch((error) => {
-        console.error('Error:', error);
-      });
+  console.error('Error:', error);
+  if (error.response) {
+    // The request was made and the server responded with a status code
+    // that falls out of the range of 2xx
+    console.error('Response data:', error.response.data);
+    console.error('Response status:', error.response.status);
+    console.error('Response headers:', error.response.headers);
+  } else if (error.request) {
+    // The request was made but no response was received
+    console.error('No response received:', error.request);
+  } else {
+    // Something happened in setting up the request that triggered an Error
+    console.error('Request setup error:', error.message);
+  }
+});
+
   };
     return ( 
       <div>
@@ -75,8 +87,8 @@ const AddHardware = () => {
                 type="text"
                 id="field-first-b"
                 className="q"
-                value={newHardware.specification}
-                onChange={(e) => handleInputChange('specification', e.target.value)}
+                value={newHardware.specifications}
+                onChange={(e) => handleInputChange('specifications', e.target.value)}
               />
             </div>
           </div>
