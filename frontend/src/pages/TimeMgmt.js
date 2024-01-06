@@ -19,32 +19,38 @@ const TimeMgmt = () => {
     const [student, setStudent] = useState([]);
     const [isPending, setIsPending] = useState(false);
 
-    const handleSubmit = () => {
+    let currentDate = new Date();
+    let startDate = new Date(currentDate.getFullYear(), 0, 1);
+    let days = Math.floor((currentDate - startDate) / (24 * 60 * 60 * 1000));
+
+    let weekNumber = Math.ceil(days / 7);
+
+    const handleSubmit = (e) => {
+        e.preventDefaukt();
         setIsPending(true);
 
         fetch(baseUrl + workUrl + '/' + id, {
             method: 'POST',
-            headers: {'content-type': 'application/json'},
+            headers: {
+                'content-type': 'application/json',
+                'accept': 'application/json'
+            },
             body: JSON.stringify(work)
-        }).then(() => {
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
             console.log('time added');
             setIsPending(false);
             navigate(-1);
         })
+        .catch(error => {
+            console.error('Error adding time:', error);
+            setIsPending(false);
+            // Handle the error appropriately, e.g., show an error message to the user
+        });
     }
-    /* const fetchWorkData = (id, week) => {
-        fetch(baseUrl + workUrl + '/' + id + '/' + week, {
-            method: 'GET',
-        })
-        .then(response => {
-            return response.json()
-        })
-        .then(data => {
-            setWork(data);
-            console.log('work');
-            console.log(data)
-        })
-    } */
     const fetchStudentData = (id) => {
         fetch(baseUrl + studentUrl + '/' + id, {
             method: 'GET',
@@ -96,7 +102,7 @@ const TimeMgmt = () => {
                             <p>{contract.employmentType}</p>
                         </div>
                     </div>
-                    <form action={baseUrl + workUrl + '/' + id} onSubmit={handleSubmit} method="POST">
+                    <form onSubmit={handleSubmit} method="POST">
                         <label>Arbeitszeit hinzufügen:</label>
                         {/* <textarea
                             required
@@ -104,29 +110,22 @@ const TimeMgmt = () => {
                             onChange={(e) => setText(e.target.value)}
                         /> */}
                         <div className="form-group" key={work.id}>
-                            <label htmlFor="calendarWeek">Kalenderwoche</label>
-                            <input 
-                                type="number" 
-                                className="form-control" 
-                                id="calendarWeek" 
-                                value={work.week} 
-                                placeholder="Kalenderwoche"
-                                onChange={(e) => setWork(e.target.value)}
-                            />
+                            <label>Kalenderwoche: {weekNumber} </label>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="workingHours">Wochenstunde</label>
+                            <label htmlFor="workingHours">Wochenstunde: </label>
                             <input 
                                 type="number" 
                                 className="form-control" 
                                 id="workingHours" 
+                                required
                                 value={work.workingHours} 
                                 placeholder="Wochenstunden"
                                 onChange={(e) => setWork(e.target.value)}
                             />
                         </div>
-                        {!isPending && <button type='submit'>Speichern</button>}
-                        {isPending && <button disabled>wird gespeichert...</button>}
+                        {!isPending && <button className='formBtn' type='submit'>Speichern</button>}
+                        {isPending && <button className='formBtn' disabled>wird gespeichert...</button>}
                     </form>
                 </div>
             )}

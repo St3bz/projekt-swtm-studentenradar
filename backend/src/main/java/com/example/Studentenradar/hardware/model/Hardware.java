@@ -38,7 +38,7 @@ public class Hardware {
     public Hardware() {
     }
 
-    public Hardware(int id, String article, String specifications) {
+    public Hardware(int id, String article, String specifications, String availability) {
         this.id = id;
         this.article = article;
         this.specifications = specifications;
@@ -75,6 +75,7 @@ public class Hardware {
 
     public void setAvailability(String availability) {
         this.availability = availability;
+    }
       
     public List<Student> getStudents() {
         return students;

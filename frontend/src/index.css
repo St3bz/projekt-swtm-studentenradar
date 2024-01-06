@@ -71,7 +71,6 @@ input[type=text] {
   margin: 4.613vmin auto 2% 0;
   padding: 1.153vmin;
   border-radius: 2.307vmin; /* 30px */
-  /* border: 2px solid #CEDCEA; */
   font-size: 1.53728vmin;
 }
 .searchIcon{
@@ -79,9 +78,6 @@ input[type=text] {
   height: 2.307vmin; /* 30px */
   width: 2.307vmin; /* 30px */
   flex-shrink: 0;
-}
-form{
-  display: flex;
 }
 
 .searchq{
@@ -338,24 +334,6 @@ form{
   margin-left: 5vmin;
 }
 
-/* .field-third-a {
-  height:  2.459648vmin; 
-  width: 7.6864vmin;
-  background-color: white;
-  border-radius: 5px;
-  box-shadow: inset 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  margin-left: 5.7vmin; 
-}
-
-.field-third-b {
-  height:  2.459648vmin;
-  width: 7.6864vmin;
-  background-color: white;
-  border-radius: 5px;
-  box-shadow: inset 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  margin-left: 2.151vmin; 
-} */
-
 #field-third-c {
   height:  2.459648vmin; /* 32px */
   width: 13.835528vmin; /* 180px */
@@ -427,7 +405,6 @@ form{
   margin-left: 5.7vmin; 
 }
 .MuiFormControl-root{
-  /* background-color: white; */
   border-radius: 5px;
 }
 .MuiTextField-root{
@@ -730,17 +707,41 @@ form{
   height: 2.307vmin;
   width: 2.307vmin;
 }
-
-textarea{
+form{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+}
+label{
+  font-size: 16px;
+}
+.formBtn{
+  height:  32px; /* 32px */
+  text-align: center;
+  font-size: 16px;
+  background-color: #CEDCEA;
+  border-radius: 50px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+input[type=number]{
+  display: flex;
+  text-align: center;
+  border-radius: 5px; /* 30px */
+  border: 2px solid #CEDCEA;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+/* textarea{
   height: 56.5vmin;
   width: 75vmin;
   border-radius: 0.76864vmin;
   box-sizing: border-box;
   border: none;
-  font-size: 1.229824vmin; /* 16px */
+  font-size: 1.229824vmin; /* 16px 
   padding: 0.922368vmin;
   resize: none;
-}
+} */
 .addButton{
   height:  2.459648vmin; /* 32px */
   width: 13.835528vmin; /* 180px */

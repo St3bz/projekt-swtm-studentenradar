@@ -93,7 +93,7 @@ function App() {
           <Route path="/teams" element={<Teams />} />
           <Route path="/teams/:id" element={<Team />} />
           <Route path="/profile/:id" element={<Profile />} />
-          <Route path="/profile/:id/time/addtime" element={<AddTime />} />
+          <Route path="/profile/:id/time/addtime/:week" element={<AddTime />} />
           <Route path="/profile/:id/time" element={<Time />} />
         </Routes>
       </div>

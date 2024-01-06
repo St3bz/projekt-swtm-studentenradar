@@ -5,7 +5,7 @@ import goBackBtn from '../images/backButton.png';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 
 const TimeMgmtView = () => {
-    const {id, week} = useParams();
+    const {id} = useParams();
     const navigate = useNavigate();
     const baseUrl = 'http://localhost:8081/api/v1';
     const workUrl = '/work';  
@@ -15,11 +15,21 @@ const TimeMgmtView = () => {
     const [student, setStudent] = useState([]);
     const [contract, setContract] = useState([]);
 
+    let currentDate = new Date();
+    let startDate = new Date(currentDate.getFullYear(), 0, 1);
+    let days = Math.floor((currentDate - startDate) / (24 * 60 * 60 * 1000));
+
+    let weekNumber = Math.ceil(days / 7);
+
+    // Display the calculated result	 
+    console.log(weekNumber);
+
+
     
-    const fetchWorkData = () => {
+    const fetchWorkData = (id, weekNumber) => {
         console.log('id:', id);
-        console.log('week:', week);
-        fetch(baseUrl + workUrl, {
+        console.log('week:', weekNumber);
+        fetch(baseUrl + workUrl + '/' + id + '/' + weekNumber, {
             method: 'GET',
         })
         .then(response => {
@@ -62,10 +72,10 @@ const TimeMgmtView = () => {
     }
     
     useEffect(() => {
-        fetchWorkData();
+        fetchWorkData(id, weekNumber);
         fetchStudentData(id);
         fetchContractData(id);
-    }, [])
+    },  [])
 
     const goBack = () => {
 		navigate(-1);
@@ -92,12 +102,12 @@ const TimeMgmtView = () => {
                     <div className='timeEditBox'>
                             <div className='contentBox'>
                                 <div className='workView'>
-                                    {work.map((hours) => ( 
-                                        <li key={hours.studentId}>Woche: {hours.week}</li>
-                                    ))}
+                                    {/* {work.map((hours) => (  */}
+                                        <li key={work.studentId}>Woche: {work.week}</li>
+                                    {/*  ))} */}
                                 </div>
                                 <div className='editBox'>
-                                    <Link to={`addtime`}>
+                                    <Link to={`addtime/${weekNumber}`}>
                                         <img src={selection} className="edit" alt="edit" />
                                     </Link>
                                 </div>
