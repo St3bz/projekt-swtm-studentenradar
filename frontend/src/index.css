@@ -45,7 +45,7 @@
   font-size: 3.0746vmin; /* 40px */
   margin-top: 19.216vmin; /* 250px */
 } 
-input[type=text] {
+.searchBar input[type=text] {
   background-color: #CEDCEA;
   width: 70.562vmin; /* 918px */
   height: 4.613vmin; /* 60px */
