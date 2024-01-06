@@ -26,22 +26,30 @@ const TimeMgmt = () => {
     let weekNumber = Math.ceil(days / 7);
 
     const handleSubmit = (e) => {
-        e.preventDefaukt();
+        e.preventDefault();
         setIsPending(true);
+
+        const postData = {
+            workingHours: work.workingHours
+        };
 
         fetch(baseUrl + workUrl + '/' + id, {
             method: 'POST',
             headers: {
-                'content-type': 'application/json',
-                'accept': 'application/json'
+                'content-type': 'application/json'
             },
-            body: JSON.stringify(work)
+            body: JSON.stringify(postData)
         })
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
             console.log('time added');
+        })
+        .then(data => {
+            setWork(data);
+            console.log('work');
+            console.log(data)
             setIsPending(false);
             navigate(-1);
         })
@@ -81,7 +89,7 @@ const TimeMgmt = () => {
         /* fetchWorkData(id, week); */
         fetchStudentData(id);
         fetchContractData(id);
-    }, [])
+    }, [id])
 
     return (  
         <div className="timeMgmt">
@@ -102,8 +110,8 @@ const TimeMgmt = () => {
                             <p>{contract.employmentType}</p>
                         </div>
                     </div>
-                    <form onSubmit={handleSubmit} method="POST">
-                        <label>Arbeitszeit hinzufügen:</label>
+                    <form className='addingTime' onSubmit={handleSubmit}>
+                        <label>Arbeitszeit hinzufügen</label>
                         {/* <textarea
                             required
                             value={text}
@@ -120,12 +128,11 @@ const TimeMgmt = () => {
                                 id="workingHours" 
                                 required
                                 value={work.workingHours} 
-                                placeholder="Wochenstunden"
-                                onChange={(e) => setWork(e.target.value)}
+                                onChange={(e) => setWork({ ...work, workingHours: e.target.value })}
                             />
                         </div>
-                        {!isPending && <button className='formBtn' type='submit'>Speichern</button>}
-                        {isPending && <button className='formBtn' disabled>wird gespeichert...</button>}
+                        {!isPending && <button className="formBtn" type="submit">Speichern</button>}
+                        {isPending && <button className="formBtn" disabled>wird gespeichert...</button>}
                     </form>
                 </div>
             )}

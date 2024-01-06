@@ -103,7 +103,7 @@ const TimeMgmtView = () => {
                             <div className='contentBox'>
                                 <div className='workView'>
                                     {/* {work.map((hours) => (  */}
-                                        <li key={work.studentId}>Woche: {work.week}</li>
+                                        <p key={work.studentId}>Woche: {work.week}</p>
                                     {/*  ))} */}
                                 </div>
                                 <div className='editBox'>

@@ -56,8 +56,16 @@ const Students = () => {
               <tbody>
                 {students.map((student) => (
                   <tr key={student.id}>
-                    <td>{student.lastName}</td>
-                    <td>{student.firstName}</td>
+                    <td>
+                      <Link to={`/profile/${student.id}`}>
+                        {student.lastName}
+                      </Link>
+                    </td>
+                    <td>
+                      <Link to={`/profile/${student.id}`}>
+                        {student.firstName}
+                      </Link>
+                    </td>
                     <td>-</td>
                   </tr>
                 ))}
