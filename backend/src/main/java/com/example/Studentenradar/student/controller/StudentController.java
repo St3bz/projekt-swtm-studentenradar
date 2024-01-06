@@ -1,4 +1,4 @@
-package com.example.Studentenradar.student.controller;
+package com.example.studentenradar.student.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.studentenradar.contract.model.Contract;
+import com.example.studentenradar.contract.model.StudentContract;
 import com.example.studentenradar.hardware.model.Hardware;
 import com.example.studentenradar.project.model.Project;
 import com.example.studentenradar.student.model.Address;
@@ -146,5 +148,38 @@ public class StudentController {
     @DeleteMapping("/{id}/hardware")
     public Boolean removeStudentHardware(@RequestBody int hardwareId, @PathVariable(name = "id") int id) {
         return service.removeStudentHardware(id, hardwareId);
+    }
+
+    // contract 
+    @GetMapping("/{id}/contract")
+    public StudentContract getStudentContractById(@PathVariable(name = "id") int id) {
+        return service.getStudentContractById(id);
+    }
+
+    
+    @PostMapping("/{id}/contract")
+    public StudentContract addStudentContract(@RequestBody Contract contract, @PathVariable(name = "id") int id) {
+        return service.addStudentContract(id, contract);
+    }
+
+    
+    @PutMapping("/{id}/contract")
+    public Contract updateContract(@RequestBody Contract contract, @PathVariable(name = "id") int id) {
+        return service.updateContract(id, contract);
+    }
+
+    @PutMapping("/{id}/contract-status")
+    public StudentContract updateContractStatus(@RequestBody String status, @PathVariable(name = "id") int id) {
+        return service.updateContractStatus(id, status);
+    }
+
+    @PutMapping("/{id}/contract-acceptance")
+    public StudentContract updateContractAcceptanceStatus(@RequestBody Boolean status, @PathVariable(name = "id") int id) {
+        return service.updateContractAcceptanceStatus(id, status);
+    }
+
+    @DeleteMapping("/{id}/contract")
+    public Boolean removeStudentContract(@PathVariable(name = "id") int id) {
+        return service.removeStudentContract(id);
     }
 }

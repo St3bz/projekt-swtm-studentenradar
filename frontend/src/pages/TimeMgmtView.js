@@ -3,10 +3,9 @@ import profileIcon from '../images/profile_icon.png';
 import selection from '../images/selection.png';
 import goBackBtn from '../images/backButton.png';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import useFetch from './useFetch';
-const ShowTimeMgmt = () => {
+
+const TimeMgmtView = () => {
     const {id} = useParams();
-    const {week} = useParams();
     const navigate = useNavigate();
     const baseUrl = 'http://localhost:8081/api/v1';
     const workUrl = '/work';  
@@ -15,16 +14,29 @@ const ShowTimeMgmt = () => {
     const [work, setWork] = useState([]);
     const [student, setStudent] = useState([]);
     const [contract, setContract] = useState([]);
-    const goBack = (id) => {
-		navigate('/profile/' + id, {replace: true});
-	}
+
+    let currentDate = new Date();
+    let startDate = new Date(currentDate.getFullYear(), 0, 1);
+    let days = Math.floor((currentDate - startDate) / (24 * 60 * 60 * 1000));
+
+    let weekNumber = Math.ceil(days / 7);
+
+    // Display the calculated result	 
+    console.log(weekNumber);
+
+
     
-    const fetchWorkData = (id, week) => {
-        fetch(baseUrl + workUrl + '/' + id + week, {
+    const fetchWorkData = (id, weekNumber) => {
+        console.log('id:', id);
+        console.log('week:', weekNumber);
+        fetch(baseUrl + workUrl + '/' + id + '/' + weekNumber, {
             method: 'GET',
         })
         .then(response => {
-            return response.json()
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
         })
         .then(data => {
             setWork(data);
@@ -58,12 +70,16 @@ const ShowTimeMgmt = () => {
             console.log(data)
         })
     }
+    
     useEffect(() => {
-        fetchWorkData(id, week);
+        fetchWorkData(id, weekNumber);
         fetchStudentData(id);
         fetchContractData(id);
-        goBack(id)
-    }, [])
+    },  [])
+
+    const goBack = () => {
+		navigate(-1);
+	}
     return (  
         <div className="TimeTable">
             {work && (
@@ -84,18 +100,18 @@ const ShowTimeMgmt = () => {
                         </div>
                     </div>
                     <div className='timeEditBox'>
-                        <div className='contentBox' key={work.id}>
-                            <div className='editBox'>
-                                <Link to={`addtime/`}>
-                                    <img src={selection} className="edit" alt="edit" />
-                                </Link>
+                            <div className='contentBox'>
+                                <div className='workView'>
+                                    {/* {work.map((hours) => (  */}
+                                        <p key={work.studentId}>Woche: {work.week}</p>
+                                    {/*  ))} */}
+                                </div>
+                                <div className='editBox'>
+                                    <Link to={`addtime/${weekNumber}`}>
+                                        <img src={selection} className="edit" alt="edit" />
+                                    </Link>
+                                </div>
                             </div>
-                            <div>
-                                {work.map(hours => (
-                                    <li key={hours.id}>{hours}</li>
-                                ))}
-                            </div>
-                        </div>
                     </div>
                 </div>
             )}
@@ -103,4 +119,4 @@ const ShowTimeMgmt = () => {
     );
 }
  
-export default ShowTimeMgmt;
+export default TimeMgmtView;

@@ -1,13 +1,13 @@
-package com.example.Studentenradar.student.model;
+package com.example.studentenradar.student.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.Studentenradar.contract.model.StudentContract;
-import com.example.Studentenradar.contract.model.Work;
-import com.example.Studentenradar.hardware.model.Hardware;
-import com.example.Studentenradar.project.model.Project;
-import com.example.Studentenradar.supervisor.model.Supervisor;
+import com.example.studentenradar.contract.model.StudentContract;
+import com.example.studentenradar.contract.model.Work;
+import com.example.studentenradar.hardware.model.Hardware;
+import com.example.studentenradar.project.model.Project;
+import com.example.studentenradar.supervisor.model.Supervisor;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -76,7 +76,8 @@ public class Student {
         inverseJoinColumns = @JoinColumn(name = "hardware_id", referencedColumnName = "id"))
     private List<Hardware> ownedHardware;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "student-contract")
+    @OneToOne(mappedBy = "student")
     private StudentContract studentContract;
 
     @OneToMany(mappedBy = "student") 
@@ -188,6 +189,14 @@ public class Student {
 
     public void removeHardware(Hardware hardware){
         ownedHardware.remove(hardware);
+    }
+
+    public StudentContract getStudentContract() {
+        return studentContract;
+    }
+
+    public void setStudentContract(StudentContract studentContract) {
+        this.studentContract = studentContract;
     }
 
     @Override

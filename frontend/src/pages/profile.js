@@ -10,7 +10,10 @@ const Profile = () => {
     const contractUrl = '/contracts'
     const {id} = useParams();
     const [contract, setContract] = useState([]);
+    const [studentContract, setStudentContract] = useState([]);
     const [student, setStudent] = useState([]);
+    const [supervisor, setSupervisor] = useState([]);
+    const [project, setProject] = useState([]);
     const [education, setEducation] = useState([]);
 
     const fetchContractData = (id) => {
@@ -39,6 +42,32 @@ const Profile = () => {
             console.log(data)
         })
     } 
+    const fetchSupervisorData = (id) => {
+        fetch(baseUrl + studentUrl + '/' + id + '/supervisor', {
+            method: 'GET',
+        })
+        .then(response => {
+            return response.json()
+        })
+        .then(data => {
+            setSupervisor(data);
+            console.log('supervisor');
+            console.log(data)
+        })
+    } 
+    const fetchProjectData = (id) => {
+        fetch(baseUrl + studentUrl + '/' + id + '/project', {
+            method: 'GET',
+        })
+        .then(response => {
+            return response.json()
+        })
+        .then(data => {
+            setProject(data);
+            console.log('project');
+            console.log(data)
+        })
+    } 
     const fetchEducationData = (id) => {
         fetch(baseUrl + studentUrl + '/' + id + '/education', {
             method: 'GET',
@@ -52,6 +81,20 @@ const Profile = () => {
             console.log(data)
         })
     }
+    const fetchStudentContractData = (id) => {
+        fetch(baseUrl + studentUrl + '/' + id + '/contract', {
+            method: 'GET',
+        })
+        .then(response => {
+            return response.json()
+        })
+        .then(data => {
+            setStudentContract(data);
+            console.log('studentContract');
+            console.log(data)
+        })
+    }
+    
     const navigate = useNavigate();
 	const goBack = () => {
         navigate('/Students', {replace: true});
@@ -59,7 +102,10 @@ const Profile = () => {
     useEffect(() => {
         fetchContractData(id);
         fetchStudentData(id);
+        fetchSupervisorData(id);
+        fetchProjectData(id);
         fetchEducationData(id);
+        fetchStudentContractData(id);
     }, [id])
 
     return (
@@ -78,7 +124,7 @@ const Profile = () => {
                 <b>{student.firstName} {student.lastName}</b>
                     <p>{contract.employmentType}</p>
                 </div>
-                <Link to={`time/${student.id}`}>
+                <Link to={`time`}>
                     <img src={time} className='time' alt='time'/>
                 </Link>
             </div>
@@ -96,19 +142,19 @@ const Profile = () => {
                                 </tr>
                                 <tr>
                                     <th>Vertragsstatus: </th>
-                                    <th>...</th>
+                                    <th>{studentContract.contractStatus}</th>
                                 </tr>
                                 <tr>
                                     <th>Status: </th>
-                                    <th>...</th>
+                                    <th>{studentContract.contractAcceptance}</th>
                                 </tr>
                                 <tr>
                                     <th>Betreuer: </th>
-                                    <th>...</th>
+                                    <th>{supervisor.firstName} {supervisor.lastName}</th>
                                 </tr>
                                 <tr>
                                     <th>Team/Projekt: </th>
-                                    <th>...</th>
+                                    <th>{project.name}</th>
                                 </tr>
                                 <tr>
                                     <th>Bemerkung: </th>

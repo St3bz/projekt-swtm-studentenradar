@@ -1,4 +1,4 @@
-package com.example.Studentenradar.hardware.controller;
+package com.example.studentenradar.hardware.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.Studentenradar.hardware.model.Hardware;
-import com.example.Studentenradar.hardware.service.HardwareBusinessService;
+import com.example.studentenradar.hardware.model.Hardware;
+import com.example.studentenradar.hardware.service.HardwareBusinessService;
 
 @RestController
 @RequestMapping("/api/v1/hardware")
@@ -42,12 +42,12 @@ public class HardwareController {
         return service.getById(id);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public boolean deleteHardware(@PathVariable(name = "id") int id) {
         return service.deleteHardware(id);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public Hardware updateHardware(@RequestBody Hardware hardware, @PathVariable(name = "id") int id) {
         return service.updateHardware(id, hardware);
     }

@@ -45,17 +45,33 @@
   font-size: 3.0746vmin; /* 40px */
   margin-top: 19.216vmin; /* 250px */
 } 
-.searchbar{
+.searchBar input[type=text] {
   background-color: #CEDCEA;
   width: 70.562vmin; /* 918px */
   height: 4.613vmin; /* 60px */
   display: flex;
   flex-shrink: 0;
-  margin: 4.613vmin auto 2% auto;
+  margin: 4.613vmin 1vmin 2% auto;
   border-radius: 2.307vmin; /* 30px */
+  border: 2px solid #CEDCEA;
   flex-direction: row;
   flex-wrap: wrap;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  background-image: url('./images/search_icon.png');
+  background-position: 1.153vmin 1.153vmin;
+  background-repeat: no-repeat;
+  background-size: 2.307vmin;
+  padding: 1.153vmin 2.307vmin 1.153vmin 4.5vmin;
+  font-size: 1.53728vmin;
+  color: #043261;
+}
+.searchBar button{
+  background-color: #CEDCEA;
+  height: 4.613vmin; /* 60px */
+  margin: 4.613vmin auto 2% 0;
+  padding: 1.153vmin;
+  border-radius: 2.307vmin; /* 30px */
+  font-size: 1.53728vmin;
 }
 .searchIcon{
   margin: 1.153vmin 1.153vmin; /* 15px 15px */
@@ -63,9 +79,7 @@
   width: 2.307vmin; /* 30px */
   flex-shrink: 0;
 }
-form{
-  display: flex;
-}
+
 .searchq{
   width: 60vmin;
   height: 2.307vmin;
@@ -143,6 +157,7 @@ form{
   border-radius: 0.76864vmin; /* 10px */
   margin-left: 20%;
   margin-top: 2%;
+  overflow-y: auto;
 
 }
 /* CSS */
@@ -182,7 +197,12 @@ form{
 .plus{
   height: 2.307vmin;
   width: 2.307vmin;
-  margin-left: 50%;
+  margin-left: 45%;
+}
+.available {
+  height: 2.307vmin;
+  width: 2.307vmin;
+  margin-left: 3%;
 }
 
 .deletion{
@@ -253,6 +273,12 @@ form{
   margin-left: 2.5vmin; /* 25px */ /* Adjust the margin-left value as needed */
 }
 
+#field-first-c {
+  margin-left: 6vmin;
+  /* 25px */
+  /* Adjust the margin-left value as needed */
+}
+
 .second-row{
   display: flex;
   flex-direction: row;
@@ -307,24 +333,6 @@ form{
 .third-row-b {
   margin-left: 5vmin;
 }
-
-/* .field-third-a {
-  height:  2.459648vmin; 
-  width: 7.6864vmin;
-  background-color: white;
-  border-radius: 5px;
-  box-shadow: inset 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  margin-left: 5.7vmin; 
-}
-
-.field-third-b {
-  height:  2.459648vmin;
-  width: 7.6864vmin;
-  background-color: white;
-  border-radius: 5px;
-  box-shadow: inset 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  margin-left: 2.151vmin; 
-} */
 
 #field-third-c {
   height:  2.459648vmin; /* 32px */
@@ -397,7 +405,6 @@ form{
   margin-left: 5.7vmin; 
 }
 .MuiFormControl-root{
-  /* background-color: white; */
   border-radius: 5px;
 }
 .MuiTextField-root{
@@ -440,6 +447,12 @@ form{
   flex-shrink: 0;
   border-radius: 0.76864vmin; /* 10px */
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.searchBar{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  flex-direction: row;
 }
 .group{
   background: #043261;
@@ -523,6 +536,7 @@ form{
 }
 .projMember tr{
   font-size: 1.844731vmin; /* 24px */
+  font-weight: light;
   color:#043261;
   display: flex;
   width: 21.602vmin; /* 333px */
@@ -537,6 +551,12 @@ form{
   width: 69.87vmin; /* 909px */
   height: 47.656vmin; /* 620px */
   margin: auto auto 2.459648vmin auto;
+}
+.projDetails p{
+  font-size: 1.844731vmin; /* 24px */
+  color:#043261;
+  font-weight: 700;
+  margin: 1.229824vmin 1.844731vmin 1.229824vmin 1.844731vmin; /* 16px 24px 16px 24px */
 }
 .goBackButton{
   display: inline;
@@ -681,29 +701,62 @@ form{
   padding: 2.459648vmin; /* 32px */
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 .editBox{
   padding: 2.459648vmin; /* 32px */
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 .edit{
   height: 2.307vmin;
   width: 2.307vmin;
 }
-
-textarea{
+.addingTime{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+}
+label{
+  font-size: 24px;
+  margin: 1vmin 0 1vmin 0;
+  color: #043261;
+  font-weight: bold;
+}
+.form-group label{
+  margin: 1vmin 0 1vmin 0;
+}
+.formBtn{
+  height:  32px; /* 32px */
+  text-align: center;
+  font-size: 16px;
+  background-color: #CEDCEA;
+  border-radius: 50px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+input[type=number]{
+  
+  text-align: center;
+  /* width: 263.28px; */
+  height:  32px; /* 32px */
+  border-radius: 5px; /* 30px */
+  border: 2px solid #CEDCEA;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 1vmin 0 1vmin 0;
+}
+/* textarea{
   height: 56.5vmin;
   width: 75vmin;
   border-radius: 0.76864vmin;
   box-sizing: border-box;
   border: none;
-  font-size: 1.229824vmin; /* 16px */
+  font-size: 1.229824vmin; /* 16px 
   padding: 0.922368vmin;
   resize: none;
-}
+} */
 .addButton{
   height:  2.459648vmin; /* 32px */
   width: 13.835528vmin; /* 180px */
@@ -737,4 +790,9 @@ textarea{
   border-radius: 0.76864vmin; /* 10px */
   margin: 3% auto auto auto;
 
+}
+.workView p{
+  font-size: 24px;
+  color: #043261;
+  font-weight: bold;
 }
