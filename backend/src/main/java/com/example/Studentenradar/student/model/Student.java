@@ -30,7 +30,7 @@ import jakarta.persistence.Table;
 @Table(name = "student")
 @JsonIgnoreProperties("ownedHardware")
 public class Student {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
@@ -59,28 +59,25 @@ public class Student {
     @JoinColumn(name = "education_id", referencedColumnName = "id")
     private Education education;
 
-    @JsonBackReference(value="student-project")
+    @JsonBackReference(value = "student-project")
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "project_id", referencedColumnName = "id")
     private Project project;
-    
-    @JsonBackReference(value="student-supervisor")
+
+    @JsonBackReference(value = "student-supervisor")
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "supervisor_id", referencedColumnName = "id")
     private Supervisor supervisor;
 
     @ManyToMany
-    @JoinTable(
-        name = "student_hardware",
-        joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name = "hardware_id", referencedColumnName = "id"))
+    @JoinTable(name = "student_hardware", joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "hardware_id", referencedColumnName = "id"))
     private List<Hardware> ownedHardware;
 
     @JsonManagedReference(value = "student-contract")
     @OneToOne(mappedBy = "student")
     private StudentContract studentContract;
 
-    @OneToMany(mappedBy = "student") 
+    @OneToMany(mappedBy = "student")
     private List<Work> works = new ArrayList<>();
 
     public Student() {
@@ -183,11 +180,11 @@ public class Student {
         this.ownedHardware = ownedHardware;
     }
 
-    public void addHardware(Hardware hardware){
+    public void addHardware(Hardware hardware) {
         ownedHardware.add(hardware);
     }
 
-    public void removeHardware(Hardware hardware){
+    public void removeHardware(Hardware hardware) {
         ownedHardware.remove(hardware);
     }
 

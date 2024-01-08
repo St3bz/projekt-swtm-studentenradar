@@ -43,7 +43,6 @@ const Hardware = () => {
                 <tr>
                   <th>Gerät</th>
                   <th>Spezifikation</th>
-                  <th>Verfügbarkeit</th>
                 </tr>
               </thead>
               <tbody>
@@ -51,7 +50,6 @@ const Hardware = () => {
                   <tr key={hardware.id}>
                     <td>{hardware.article}</td>
                     <td>{hardware.specifications}</td>
-                    <td>{hardware.availability}</td>
                   </tr>
                 ))}
               </tbody>

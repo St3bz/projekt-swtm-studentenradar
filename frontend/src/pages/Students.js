@@ -8,26 +8,24 @@ import useFetch from './useFetch';
 
 const Students = () => {
   const { id } = useParams();
-  /*const { data: students, error, isPending } = useFetch('http://localhost:8081/api/v1/students' + id);
-  console.log(students);*/
-  const [students, setStudents] = useState([])
+  const baseUrl = 'http://localhost:8081/api/v1';
+  const studentUrl = '/students';
+  const [students, setStudents] = useState([]);
+
   const fetchStudentData = () => {
-        fetch('http://localhost:8081/api/v1/students', {
-            method: 'GET',
-        })
-        .then(response => {
-            return response.json()
-        })
-        .then(data => {
-            setStudents(data);
-            console.log('zuweisung');
-            console.log(data)
-        })
-    }
-    useEffect(() => {
-        fetchStudentData();
-        /* fetchStudentData() */
-    }, [])
+    fetch('http://localhost:8081/api/v1/students', {
+      method: 'GET',
+    })
+    .then(response => response.json())
+    .then(data => {
+      setStudents(data);
+      console.log(data);
+    });
+  };
+
+  useEffect(() => {
+    fetchStudentData();
+  }, [id]);
 
   return (
     <div>
@@ -41,7 +39,7 @@ const Students = () => {
           <img src={selection} className="selection" alt="logo" />
         </Link>
       </div>
-      
+
       {students && (
         <div>
           <div className="table-box">
@@ -58,7 +56,10 @@ const Students = () => {
                   <tr key={student.id}>
                     <td>{student.lastName}</td>
                     <td>{student.firstName}</td>
-                    <td>-</td>
+                    <td>
+                      {/* Fetch project data for each student */}
+                      <FetchProjectData studentId={student.id} />
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -69,5 +70,38 @@ const Students = () => {
     </div>
   );
 };
+
+const FetchProjectData = ({ studentId }) => {
+  const baseUrl = 'http://localhost:8081/api/v1';
+  const studentUrl = '/students';
+  const [project, setProject] = useState({});
+
+  const fetchProjectData = () => {
+    fetch(`${baseUrl}${studentUrl}/${studentId}/project`, {
+      method: 'GET',
+    })
+    .then(response => response.json())
+    .then(data => {
+      setProject(data);
+      console.log('project');
+      console.log(data);
+    });
+  };
+
+  useEffect(() => {
+    fetchProjectData();
+  }, [studentId]);
+
+  return (
+    <div>
+      {project.name ? (
+        project.name
+      ) : (
+        <span>Kein Project</span>
+      )}
+    </div>
+  );
+};
+
 
 export default Students;

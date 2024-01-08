@@ -126,7 +126,6 @@ const HardwareEdit = () => {
                 <tr>
                   <th>Gerät</th>
                   <th>Spezifikation</th>
-                  <th>Verfügbarkeit</th>
                   <th>
                     <input
                       type="checkbox"
@@ -148,7 +147,6 @@ const HardwareEdit = () => {
                   <tr key={hardware.id}>
                     <td>{hardware.article}</td>
                     <td>{hardware.specifications}</td>
-                    <td>{hardware.availability}</td>
                     <td>
                       <input
                         type="checkbox"

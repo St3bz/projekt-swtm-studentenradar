@@ -23,7 +23,7 @@ const StudentsEdit = () => {
 
   useEffect(() => {
     fetchStudentData();
-  }, []);
+  }, [id]);
 
   const toggleCheckbox = (id) => {
     setSelectedIds(prevSelectedIds => {
@@ -102,7 +102,10 @@ const StudentsEdit = () => {
                   <tr key={student.id}>
                     <td>{student.lastName}</td>
                     <td>{student.firstName}</td>
-                    <td>-</td>
+                    <td>
+                      {/* Fetch project data for each student */}
+                      <FetchProjectData studentId={student.id} />
+                    </td>
                     <td>
                       <input
                         type="checkbox"
@@ -118,6 +121,38 @@ const StudentsEdit = () => {
             </table>
           </div>
         </div>
+      )}
+    </div>
+  );
+};
+
+const FetchProjectData = ({ studentId }) => {
+  const baseUrl = 'http://localhost:8081/api/v1';
+  const studentUrl = '/students';
+  const [project, setProject] = useState({});
+
+  const fetchProjectData = () => {
+    fetch(`${baseUrl}${studentUrl}/${studentId}/project`, {
+      method: 'GET',
+    })
+    .then(response => response.json())
+    .then(data => {
+      setProject(data);
+      console.log('project');
+      console.log(data);
+    });
+  };
+
+  useEffect(() => {
+    fetchProjectData();
+  }, [studentId]);
+
+  return (
+    <div>
+      {project.name ? (
+        project.name
+      ) : (
+        <span>Kein Project</span>
       )}
     </div>
   );
