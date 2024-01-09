@@ -4,7 +4,7 @@ import goBackBtn from '../images/backButton.png';
 import plus from '../images/plus.png';
 import deletion from '../images/delete.png';
 import checkbox from '../images/checkbox.png';
-import Searchbar from './Searchbar';
+import Searchbar from './StundentsSearchbar';
 import { Link } from 'react-router-dom';
 import { useParams, useNavigate } from 'react-router-dom';
 
@@ -12,6 +12,9 @@ const StudentsEdit = () => {
   const { id } = useParams();
   const [students, setStudents] = useState([]);
   const [selectedIds, setSelectedIds] = useState([]);
+  const [filteredStudents, setFilteredStudents] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
   
   const fetchStudentData = () => {
     fetch('http://localhost:8081/api/v1/students', {
@@ -53,12 +56,57 @@ const StudentsEdit = () => {
   });
   };
 
+  const handleSearch = (searchTerm) => {
+    setSearchTerm(searchTerm);
+
+    if (searchTerm.trim() === '') {
+        setFilteredStudents([]);
+    return;
+}
+
+const filtered = students.filter(
+  (student) =>
+    student.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    student.lastName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  setFilteredStudents(filtered);
+};
+
+const handleSearchSuggestions = (searchTerm) => {
+  const suggestions = students.filter((student) =>
+    student.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    student.lastName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  setFilteredStudents(suggestions);
+};
+
+const renderResults = () => {
+    if(!searchTerm) return null;
+    if (filteredStudents.length === 0) {
+        return <p>No matching teams found for "{searchTerm}".</p>;
+    } else {
+        return (
+            <div>
+                <p>Matching teams for "{searchTerm}":</p>
+                <ul>
+                    {filteredStudents.map((student) => (
+                    <li key={student.id} onClick={() => navigate(`/profile/${student.id}`)} >
+                        {student.firstName} {student.lastName}
+                    </li>
+                    ))}
+                </ul>
+            </div>
+        );
+    }
+};
+
   return (
     <div>
       <div className="title">
         <b>Studenten</b>
       </div>
-      <Searchbar />
+      <Searchbar handleSearch={handleSearch} handleSuggestions={handleSearchSuggestions}/>
+      {renderResults()}
       <div className="auswahl">
         <img src={sort} className="sort" alt="logo" />
         <a href="add"><img src={plus} className="plus" alt="logo" /></a>

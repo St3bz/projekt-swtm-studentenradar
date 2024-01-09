@@ -38,16 +38,14 @@ const Teams = () => {
     }
 
     const filtered = projects.filter(
-        (project) => project.name.toLowerCase().includes(searchTerm.toLowerCase())
-        );
+        (project) => project.name.toLowerCase().includes(searchTerm.toLowerCase()));
         setFilteredProjects(filtered);
     };
 
     const handleSearchSuggestions = (searchTerm) => {
     
         const suggestions = projects.filter(
-        (project) => project.name.toLowerCase().includes(searchTerm.toLowerCase())
-        );
+        (project) => project.name.toLowerCase().includes(searchTerm.toLowerCase()));
         setFilteredProjects(suggestions);
     };
 
